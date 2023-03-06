@@ -15,7 +15,7 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWD }}
-        server-dir: pre-yexpenses.curvaturaestudio.com/
+        server-dir: pre.yexpenses.curvaturaestudio.com/
   deploy_on_prod:
     name: 🎉 Deploy on prod
     runs-on: ubuntu-latest
