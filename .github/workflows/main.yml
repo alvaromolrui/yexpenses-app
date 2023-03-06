@@ -14,3 +14,4 @@ jobs:
         server: ftp.curvaturaestudio.com
         username: y2ag4ndq
         password: ${{ secrets.ftp_password }}
+        server-dir: public_html/www/yexpenses.curvaturaestudio.com/
