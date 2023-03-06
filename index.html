@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Proyecto</title>
+</head>
+<body>
+    <div class="header">
+        <div class="buttonFrame">
+        <button onclick="showOptions()" id="editContent" class="editContent">
+            <svg class="editIcon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 25 25">
+                <path d="M20.748 4.748a3.886 3.886 0 0 0-5.496 0l-7.203 7.203 5.496 5.496 7.203-7.203a3.886 3.886 0 0 0 0-5.496Zm-8.819 14.223-5.404-5.404a4.44 4.44 0 0 0-.624 1.283L4.46 19.654a1.11 1.11 0 0 0 1.382 1.382l4.804-1.44a4.44 4.44 0 0 0 1.283-.625Z"/>
+              </svg>
+        </button>
+        <button id="showForm" class="showForm">
+            <svg class="addIcon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 25 25">
+                <g stroke-width="2">
+                  <path d="M12.5 5v15m7.5-7.5H5"/>
+                  <rect width="23" height="23" x="1" y="1" rx="4"/>
+                </g>
+              </svg>
+        </button>
+    </div>
+    </div>
+
+    <div class="main">
+        <div class="buttonFrame">
+        <button id="showForm" class="showForm">
+            <svg class="addIcon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 25 25">
+                <g stroke-width="2">
+                  <path d="M12.5 5v15m7.5-7.5H5"/>
+                  <rect width="23" height="23" x="1" y="1" rx="4"/>
+                </g>
+              </svg>              
+            Nueva entrada
+        </button>
+    </div> 
+        <button onclick="hideOptions()" id="endEdit" class="endEdit">
+            <svg class="closeIcon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 25 25">
+                <path stroke-width="2" d="M17.803 7.197 7.197 17.803m10.606 0L7.197 7.197"/>
+                <rect width="23" height="23" x="1" y="1" stroke-width="2" rx="4"/>
+              </svg>
+        </button>
+        <div id="table" class="table">
+        </div>
+    </div>
+
+    <!--Ventana: Añadir nueva entrada-->
+    <div id="formModal" class="formContainer">
+        <h1 class="formTitle">Crea un nuevo item</h1>
+        <form id="formulario" class="formulario">
+            <label for="title">Título
+            <input id="title" type="text" name="title" class="name" placeholder="Escribe un título..."></label>
+            <label for="price">Precio
+            <input id="price" step="0.01" min="0" pattern="\d*" oninput="showNumericKeyboard(event)" type="number" name="price" class="price" placeholder="Escribe el precio..."></label>
+            <label for="date">Fecha
+            <input id="date" type="date" name="date" class="date"></label>
+            <div class="buttomFrame">
+                <button type="submit" id="addItem" class="addItem">+ Añadir elemento</button>
+                <button id="closeForm" class="closeForm">Cancelar</button>
+            </div>
+          </form>    
+    </div>
+    <div id="backgroundModal" class="backgroundModal"></div>
+    
+</body>
+<script src="script.js"></script>
+</html>
