@@ -1,5 +1,5 @@
 on: push
-name: 🚀 Deploy app on push
+name: 🚀 Desplegar en prod
 jobs:
   deploy_on_pre:
     name: 🎉 Deploy on pre
