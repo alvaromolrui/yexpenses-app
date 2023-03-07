@@ -1,5 +1,5 @@
 on: workflow_dispatch
-name: 🚀 Desplegar en prod (on push)
+name: 🚀 Desplegar en prod (on run)
 jobs:
   deploy_on_pre:
     name: 🎉 Deploy on pre
