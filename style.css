@@ -147,7 +147,7 @@ body {
 
 /* Topbar */
 .header {
-  position: static;
+  position: fixed;
   top: 0;
   width: 100%;
   border-bottom: 1px solid #2C2C2C;
@@ -240,6 +240,7 @@ body {
   box-sizing: border-box;
   overflow-y: auto;
   padding: 20px 0px 80px 0px;
+  margin-top: 66px;
 }
 
   /* Botón mostrar formulario */
@@ -456,21 +457,6 @@ body {
       .closeForm:hover {
         background: #2C2C2C;
       }
-
-/* Topbar */
-.footer {
-  position: static;
-  bottom: 0;
-  width: 100%;
-  height: 66px;
-  border-top: 1px solid #2C2C2C;
-  background: #1E1E1E;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 20px 20px;
-}
 
 /* Background popup */
 .backgroundModal {
