@@ -1,3 +1,4 @@
+/* Estilos de generales */
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap');
 
 * {
@@ -5,20 +6,36 @@
   font-family: 'Archivo', sans-serif;
   margin-block-start: 0;
   margin-block-end: 0;
+  scroll-behavior: smooth;
 }
 
 button {
-  cursor: pointer;
-  background: none;
-  outline: none;
   border: none;
   padding: 0;
+  margin: 0;
+  text-decoration: none;
+  background: none;
+  cursor: pointer;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 input[type=number] {
   -webkit-appearance: none;
   -moz-appearance: none;
   margin: 0;
+}
+
+label {
+  font-weight: 600;
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
 }
 
 input {
@@ -38,58 +55,31 @@ input {
   transition: border 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
 }
     
-input:hover {
-  border: 1px solid #A0928C;
-}
+  input:hover {
+    border: 1px solid #A0928C;
+  }
 
-input:focus {
-  border: 1px solid #7fccb2;
-}
+  input:focus {
+    border: 1px solid #7fccb2;
+  }
 
-input::placeholder {
-  color: #676767;
-}
+  input::placeholder {
+    color: #676767;
+  }
 
-label {
-  font-weight: 600;
-  font-size: 16px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 10px;
-}
-
-
-body {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-  margin: 0 auto;
-  overflow: hidden;
-  gap: 20px;
-  background: #1E1E1E;
-  overflow: auto;
-}
-
-/* Personalizar la barra de desplazamiento */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px; /* Ancho de la barra de desplazamiento */
+  width: 10px;
 }
 
-/* Personalizar el thumb de la barra de desplazamiento */
 ::-webkit-scrollbar-thumb {
-  background-color: #2C2C2C; /* Color del thumb */
-  border-radius: 5px; /* Radio de las esquinas */
+  background-color: #2C2C2C;
+  border-radius: 5px;
 }
 
-/* Personalizar el fondo de la barra de desplazamiento */
 ::-webkit-scrollbar-track {
-  background-color: transparent; /* Color del fondo */
+  background-color: transparent;
+  margin: 20px 0px;
 }
 
 /* Estilos de texto */
@@ -113,160 +103,21 @@ p {
   font-size: 12px;
 }
 
-/* Topbar */
-.header {
+/* Body */
+body {
   width: 100%;
-  border-bottom: 1px solid #2C2C2C;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 20px 20px;
-}
-
-.header .buttonFrame {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 20px;
-  padding: 0px 10px;
-  box-sizing: border-box;
-}
-
-.header .showForm {
-  align-self: flex-end;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
-  font-family: 'Archivo', sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  color: #C8C8C8;
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-}
-
-.header .showForm:hover {
-  color: #fff;
-}
-
-.header .addIcon {
-  stroke: #C8C8C8;
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-}
-.header .showForm:hover .addIcon {
-  stroke: #fff;
-}
-
-.header .editContent {
-  align-self: flex-end;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
-  font-family: 'Archivo', sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  color: #C8C8C8;
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-}
-
-.header .editContent:hover {
-  color: #fff;
-}
-
-.header .editIcon {
-  fill: #C8C8C8;
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-}
-.header .editContent:hover .editIcon {
-  fill: #fff;
-}
-
-/* Content */
-.main {
-  width: 100%;
-  max-width: 800px;
-  min-width: 200px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
   height: 100vh;
-  padding: 0px 20px 20px 20px;
-  gap: 20px;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-.main .buttonFrame {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 20px;
-  padding: 0px 10px;
-  box-sizing: border-box;
-}
-
-.main .buttonFrame .showForm {
-  position: relative;
-  width: 100%;
-  height: 93px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border-radius: 10px;
-  border: 2px solid rgba(103, 103, 103, 1);
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-  box-sizing: border-box;
-  font-family: 'Archivo', sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  color: #C8C8C8;
-}
-
-.main .buttonFrame .showForm:hover {
-  color: #fff;
-  border: 2px solid #a3a3a3;
-}
-
-.main .buttonFrame .addIcon {
-  stroke: #C8C8C8;
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-}
-.main .buttonFrame .showForm:hover .addIcon {
-  stroke: #fff;
-}
-
-.main .buttonFrame .editContent {
-  align-self: flex-end;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 10px;
-  font-family: 'Archivo', sans-serif;
-  font-weight: 600;
-  font-size: 18px;
-  color: #C8C8C8;
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+  flex-direction: column;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #1E1E1E;
+  box-sizing: border-box;
 }
 
-.main .buttonFrame .editContent:hover {
-  color: #fff;
-}
-
-.main .buttonFrame .editIcon {
-  fill: #C8C8C8;
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-}
-.main .buttonFrame .editContent:hover .editIcon {
-  fill: #fff;
-}
-
+/* Botón salir del modo edición */
 .endEdit {
   position:absolute;
   top: 50px;
@@ -281,144 +132,254 @@ p {
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.75);
   transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
 }
-.closeIcon {
-  stroke: #C8C8C8;
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-}
-.endEdit:hover .closeIcon {
-  stroke: #fff;
-}
 
-.table {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
+  .endEdit .closeIcon {
+    stroke: #C8C8C8;
+    width: 25px;
+    fill: none;
+    transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+  }
+
+    .endEdit:hover .closeIcon {
+      stroke: #fff;
+    }
+
+
+/* Topbar */
+.header {
+  position: static;
+  top: 0;
   width: 100%;
-  max-width: 800px;
-  min-width: 200px;
-  gap: 20px;
-  overflow-y: auto;
-  padding: 0px 10px;
+  border-bottom: 1px solid #2C2C2C;
+  background: #1E1E1E;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   box-sizing: border-box;
+  padding: 20px 20px;
 }
 
+  /* Button frame */
+  .header .buttonFrame {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    padding: 0px 10px;
+    box-sizing: border-box;
+  }
 
-.item {
+    /* Botón mostrar formulario */
+    .header .buttonFrame .showForm {
+      align-self: flex-end;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: #C8C8C8;
+      transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+    }
+
+    .header .buttonFrame .showForm:hover {
+      color: #fff;
+    }
+
+      .header .buttonFrame .showForm .addIcon {
+        stroke: #C8C8C8;
+        fill: none;
+        width: 25px;
+        transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+      }
+
+      .header .buttonFrame .showForm:hover .addIcon {
+        stroke: #fff;
+      }
+
+    /* Botón editar contenidos */
+    .header .buttonFrame .editContent {
+      align-self: flex-end;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: #C8C8C8;
+      transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+    }
+
+    .header .buttonFrame .editContent:hover {
+      color: #fff;
+    }
+
+      .header .buttonFrame .editContent .editIcon {
+        fill: #C8C8C8;
+        width: 25px;
+        transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+      }
+
+        .header .buttonFrame .editContent:hover .editIcon {
+          fill: #fff;
+        }
+
+/* Content */
+.main {
   position: relative;
-  cursor: default;
   width: 100%;
+  height: auto;
   display: flex;
-  align-items: flex-start;
   justify-content: flex-start;
+  align-items: center;
   flex-direction: column;
-  gap: 5px;
-  padding: 20px;
-  border-radius: 10px;
-  background: #2C2C2C;
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+  gap: 20px;
+  padding: 20px 10px 20px 30px;
   box-sizing: border-box;
-  border: 2px solid rgba(103, 103, 103, 0);
+  overflow-y: auto;
 }
 
-.itemHeader {
+  /* Botón mostrar formulario */
+  .main .showForm {
+    width: 100%;
+    max-width: 800px;
+    min-width: 200px;
+    height: 93px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex: none;
+    border-radius: 10px;
+    border: 2px solid rgba(103, 103, 103, 1);
+    transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+    box-sizing: border-box;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #C8C8C8;
+  }
+
+    .main .showForm:hover {
+      color: #fff;
+      border: 2px solid #a3a3a3;
+    }
+
+      .main .showForm .addIcon {
+        width: 25px;
+        stroke: #C8C8C8;
+        fill: none;
+        transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+      }
+      
+      .main .showForm:hover .addIcon {
+        stroke: #fff;
+      }
+
+/* Tabla de contenidos */
+.table {
   width: 100%;
-  display: flex;
-  align-items: space-between;
-  justify-content: flex-start;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.itemTitle {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 22px;
-}
-
-.itemContent {
-  width: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-
-.itemDate {
-  font-family: 'Archivo', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: #676767;
-}
-
-.itemPrice {
-  font-family: 'Archivo', sans-serif;
-  font-weight: 400;
-  font-size: 24px;
-}
-
-.deleteItem {
-  align-self: flex-end;
-  width: 22px;
-  height: 22px;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  padding: 5px 0px 0px 0px;
-
-}
-
-.deleteItem div {
-  position: absolute;
-  width: 15px;
-  height: 2px;
-  background: #C8C8C8;
-  border-radius: 5px;
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-}
-
-.deleteItem:hover div {
-  background: #c41515;
-}
-
-.deleteItem:hover div:first-child {
-  transform: rotate(45deg);
-  width: 20px;
-}
-
-.deleteItem:hover div:last-child {
-  transform: rotate(-45deg);
-  width: 20px;
-}
-
-.formContainer .buttomFrame{
-  width: 100%;
+  height: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 10px;
   flex-direction: column;
-  gap: 10px;
-}
-  
-.addItem {
-  cursor: pointer;
-  background: #4bb491;
-  color: white;
-  border: none;
-  font-family: 'Archivo', sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  padding: 15px 20px;
-  width: 100%;
-  border-radius: 5px;
-  transition: background 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+  gap: 20px;
+  box-sizing: border-box;
 }
 
-.addItem:hover {
-  background: #3e987a;
-}
-  
+  .table .item {
+    position: relative;
+    cursor: default;
+    width: 100%;
+    max-width: 800px;
+    min-width: 200px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #2C2C2C;
+    transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+    box-sizing: border-box;
+    border: 2px solid rgba(103, 103, 103, 0);
+  }
+
+  .table .item .itemHeader {
+    width: 100%;
+    display: flex;
+    align-items: space-between;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+    .table .item .itemHeader .itemTitle {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 22px;
+    }
+
+    .table .item .itemHeader .deleteItem {
+      align-self: flex-end;
+      width: 22px;
+      height: 22px;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 0px 0px 0px;
+    }
+    
+      .table .item .itemHeader .deleteItem div {
+        position: absolute;
+        width: 15px;
+        height: 2px;
+        background: #C8C8C8;
+        border-radius: 5px;
+        transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+      }
+      
+        .table .item .itemHeader .deleteItem:hover div {
+          background: #c41515;
+        }
+        
+        .table .item .itemHeader .deleteItem:hover div:first-child {
+          transform: rotate(45deg);
+          width: 20px;
+        }
+        
+        .table .item .itemHeader .deleteItem:hover div:last-child {
+          transform: rotate(-45deg);
+          width: 20px;
+        }
+
+  .table .item .itemContent {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+    .table .item .itemContent .itemDate {
+      font-family: 'Archivo', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #676767;
+    }
+
+    .table .item .itemContent .itemPrice {
+      font-family: 'Archivo', sans-serif;
+      font-weight: 400;
+      font-size: 24px;
+    }
+
+/* Formulario */
 .formContainer {
   position: fixed;
   bottom: 0;
@@ -439,35 +400,79 @@ p {
   z-index: 10;
 }
 
-.formulario {
+  .formContainer .formTitle {
+    cursor: default;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .formContainer .formulario {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .formContainer .buttomFrame {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 10px;
+    flex-direction: column;
+    gap: 10px;
+  }
+    
+    .addItem {
+      cursor: pointer;
+      background: #4bb491;
+      color: white;
+      border: none;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 15px 20px;
+      width: 100%;
+      border-radius: 5px;
+      transition: background 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+    }
+
+      .addItem:hover {
+        background: #3e987a;
+      }
+
+    .closeForm {
+      font-family: 'Archivo', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 15px 20px;
+      width: 100%;
+      border-radius: 5px;
+      transition: background 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+    }
+
+      .closeForm:hover {
+        background: #2C2C2C;
+      }
+
+/* Topbar */
+.footer {
+  position: static;
+  bottom: 0;
   width: 100%;
+  height: 66px;
+  border-top: 1px solid #2C2C2C;
+  background: #1E1E1E;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 15px;
-}  
-
-.formTitle {
-  cursor: default;
-  width: 100%;
-  margin-bottom: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20px 20px;
 }
 
-.closeForm {
-  font-family: 'Archivo', sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  padding: 15px 20px;
-  width: 100%;
-  border-radius: 5px;
-  transition: background 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-}
-
-.closeForm:hover {
-  background: #2C2C2C;
-}
-
+/* Background popup */
 .backgroundModal {
   position: absolute;
   width: 100%;
