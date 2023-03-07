@@ -33,6 +33,7 @@ showForm.forEach(element => {
     formModal.style.bottom = '0px';
     backgroundModal.style.opacity = '1';
     backgroundModal.style.visibility = 'visible';
+    document.body.style.overflow = "hidden";
   
     const dateControl = document.querySelector('input[type="date"]');
     const currentDate = new Date(); // crea un objeto de fecha con la fecha y hora actual
@@ -54,6 +55,7 @@ closeForm.addEventListener('click', () => {
   formModal.style.visibility = 'hidden';
   backgroundModal.style.opacity = '0';
   backgroundModal.style.visibility = 'hidden';
+  document.body.style.overflow = "";
 });
 
 // Enviar datos del formulario a php
@@ -69,6 +71,7 @@ form.addEventListener("submit", function(event) {
   formModal.style.visibility = 'hidden';
   backgroundModal.style.opacity = '0';
   backgroundModal.style.visibility = 'hidden';
+  document.body.style.overflow = "";
 
   // Formatear el formulario
   document.getElementById("formulario").reset();
