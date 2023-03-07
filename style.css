@@ -78,8 +78,7 @@ input {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
-  margin: 88px 0px 80px 0px;
+  background-color: #191919;
 }
 
 /* Estilos de texto */
@@ -239,7 +238,7 @@ body {
   flex-direction: column;
   gap: 20px;
   box-sizing: border-box;
-  padding: 20px 0px 80px 0px;
+  padding: 20px 0px 40px 0px;
   margin-top: 66px;
 }
 
