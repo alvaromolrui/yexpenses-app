@@ -13,7 +13,8 @@ fclose($archivo);
 
 // Extraer y crear tabla
 $primera_fila = true;
-foreach ($datos as $fila) {
+$datos_invertidos = array_reverse($datos);
+foreach ($datos_invertidos as $fila) {
   $primer_valor = $fila[1];
   $segundo_valor = $fila[2];
   $tercer_valor = $fila[3];
