@@ -26,23 +26,15 @@ backgroundModal.style.zIndex = '';
 backgroundModal.style.opacity = '0';
 backgroundModal.style.visibility = 'hidden';
 
-// Inputfocus
-/*
+// Mostrar formulario - Botón +
 showForm.forEach(element => {
   element.addEventListener('click', () => {
     new Promise(resolve => {
-      formModal.style.display = "block";
+      formModal.style.display = "flex";
       resolve();
     }).then(() => {
       document.getElementById("title").focus();
     });
-  });
-});
-*/
-
-// Mostrar formulario - Botón +
-showForm.forEach(element => {
-  element.addEventListener('click', () => {
     formModal.style.visibility = 'visible';  
     formModal.style.opacity = '1';
     formModal.style.bottom = '0px';
@@ -51,10 +43,7 @@ showForm.forEach(element => {
     backgroundModal.style.visibility = 'visible';
     document.body.style.overflow = "hidden";
 
-    setTimeout(function() {
-      document.getElementById("title").style.display = "block";
-      document.getElementById("title").focus();
-    }, 100);
+
   
     const dateControl = document.querySelector('input[type="date"]');
     const currentDate = new Date(); // crea un objeto de fecha con la fecha y hora actual
@@ -74,11 +63,11 @@ closeForm.addEventListener('click', () => {
   formModal.style.bottom = '-100px';
   formModal.style.opacity = '0';
   formModal.style.visibility = 'hidden';
+  formModal.style.display = "";
   backgroundModal.style.zIndex = '';
   backgroundModal.style.opacity = '0';
   backgroundModal.style.visibility = 'hidden';
   document.body.style.overflow = "";
-  document.getElementById("title").style.display = "";
 });
 
 // Enviar datos del formulario a php
