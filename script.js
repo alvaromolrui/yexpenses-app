@@ -27,6 +27,7 @@ backgroundModal.style.opacity = '0';
 backgroundModal.style.visibility = 'hidden';
 
 // Inputfocus
+/*
 showForm.forEach(element => {
   element.addEventListener('click', () => {
     new Promise(resolve => {
@@ -37,6 +38,7 @@ showForm.forEach(element => {
     });
   });
 });
+*/
 
 // Mostrar formulario - Botón +
 showForm.forEach(element => {
@@ -50,6 +52,7 @@ showForm.forEach(element => {
     document.body.style.overflow = "hidden";
 
     setTimeout(function() {
+      document.getElementById("title").style.display = "block";
       document.getElementById("title").focus();
     }, 100);
   
@@ -75,6 +78,7 @@ closeForm.addEventListener('click', () => {
   backgroundModal.style.opacity = '0';
   backgroundModal.style.visibility = 'hidden';
   document.body.style.overflow = "";
+  document.getElementById("title").style.display = "";
 });
 
 // Enviar datos del formulario a php
