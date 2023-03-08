@@ -26,6 +26,21 @@ backgroundModal.style.zIndex = '';
 backgroundModal.style.opacity = '0';
 backgroundModal.style.visibility = 'hidden';
 
+
+
+const searchBox = document.getElementById("search-box");
+const inputTitle = document.getElementById("title");
+
+function focusFirstInput() {
+  new Promise(resolve => {
+    formModal.style.display = "block";
+    resolve();
+  }).then(() => {
+    var inputTitle = document.getElementById("title");
+    inputTitle.focus();
+  });
+}
+
 // Mostrar formulario - Botón +
 showForm.forEach(element => {
   element.addEventListener('click', () => {
@@ -37,14 +52,10 @@ showForm.forEach(element => {
     backgroundModal.style.visibility = 'visible';
     document.body.style.overflow = "hidden";
 
-    new Promise(resolve => {
-      formModal.style.display = "block";
-      resolve();
-    }).then(() => {
+
       setTimeout(function() {
-        document.getElementById("title").focus();
+        focusFirstInput();
       }, 100);
-    });
   
     const dateControl = document.querySelector('input[type="date"]');
     const currentDate = new Date(); // crea un objeto de fecha con la fecha y hora actual
