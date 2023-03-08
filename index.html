@@ -12,28 +12,28 @@
 
 <body>
 
-<!-- Botón salir del modo edición -->
-<button onclick="hideOptions()" id="endEdit" class="endEdit">
-    <svg class="closeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
-        <path stroke-width="2" d="M17.803 7.197 7.197 17.803m10.606 0L7.197 7.197"/>
-        <rect width="23" height="23" x="1" y="1" stroke-width="2" rx="4"/>
-    </svg>
-</button>
-
 <!-- Topbar: Botón añadir editar entradas + Botón añadir nueva entrada -->
 <header class="header">
     <div class="buttonFrame">
+        <!-- Botón editar contenido -->
         <button onclick="showOptions()" id="editContent" class="editContent">
             <svg class="editIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
                 <path d="M20.748 4.748a3.886 3.886 0 0 0-5.496 0l-7.203 7.203 5.496 5.496 7.203-7.203a3.886 3.886 0 0 0 0-5.496Zm-8.819 14.223-5.404-5.404a4.44 4.44 0 0 0-.624 1.283L4.46 19.654a1.11 1.11 0 0 0 1.382 1.382l4.804-1.44a4.44 4.44 0 0 0 1.283-.625Z"/>
               </svg>
         </button>
+        <!-- Botón mostrar formulario -->
         <button class="showForm">
             <svg class="addIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
                 <g stroke-width="2">
                     <path d="M12.5 5v15m7.5-7.5H5"/>
                     <rect width="23" height="23" x="1" y="1" rx="4"/>
                 </g>
+            </svg>
+        </button>
+        <!-- Botón salir del modo edición -->
+        <button onclick="hideOptions()" id="endEdit" class="endEdit">
+            <svg class="closeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
+                <path stroke-width="2" d="M21.343 3.657 3.657 21.343m17.686 0L3.657 3.657"/>
             </svg>
         </button>
     </div>

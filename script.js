@@ -22,6 +22,7 @@ const backgroundModal = document.getElementById("backgroundModal");
 formModal.style.visibility = 'hidden';
 formModal.style.opacity = '0';
 formModal.style.bottom = '-100px';
+backgroundModal.style.zIndex = '';
 backgroundModal.style.opacity = '0';
 backgroundModal.style.visibility = 'hidden';
 
@@ -31,9 +32,14 @@ showForm.forEach(element => {
     formModal.style.visibility = 'visible';  
     formModal.style.opacity = '1';
     formModal.style.bottom = '0px';
+    backgroundModal.style.zIndex = '21';
     backgroundModal.style.opacity = '1';
     backgroundModal.style.visibility = 'visible';
     document.body.style.overflow = "hidden";
+
+    setTimeout(function() {
+      document.getElementById("title").focus();
+    }, 100);
   
     const dateControl = document.querySelector('input[type="date"]');
     const currentDate = new Date(); // crea un objeto de fecha con la fecha y hora actual
@@ -53,6 +59,7 @@ closeForm.addEventListener('click', () => {
   formModal.style.bottom = '-100px';
   formModal.style.opacity = '0';
   formModal.style.visibility = 'hidden';
+  backgroundModal.style.zIndex = '';
   backgroundModal.style.opacity = '0';
   backgroundModal.style.visibility = 'hidden';
   document.body.style.overflow = "";
@@ -69,6 +76,7 @@ form.addEventListener("submit", function(event) {
   formModal.style.bottom = '-100px';
   formModal.style.opacity = '0';
   formModal.style.visibility = 'hidden';
+  backgroundModal.style.zIndex = '';
   backgroundModal.style.opacity = '0';
   backgroundModal.style.visibility = 'hidden';
   document.body.style.overflow = "";
@@ -127,6 +135,7 @@ function showOptions() {
   const item = document.querySelectorAll(".item");
   const table = document.getElementById("table");
   const endEdit = document.getElementById("endEdit");
+  const editContent = document.getElementById("editContent");
 
   deleteButtons.forEach(element => {
     element.style.display = "flex";
@@ -135,6 +144,10 @@ function showOptions() {
     element.style.border = "2px solid rgba(103, 103, 103, 1)";
     element.style.zIndex = "15";
   });
+  showForm.forEach(element => {
+    element.style.display = "none"
+  });
+  editContent.style.display = "none";
   endEdit.style.display = "flex";
   endEdit.style.zIndex = "15";
   table.style.zIndex = "15";
@@ -147,6 +160,7 @@ function hideOptions() {
   const item = document.querySelectorAll(".item");
   const table = document.getElementById("table");
   const endEdit = document.getElementById("endEdit");
+  const editContent = document.getElementById("editContent");
 
   deleteButtons.forEach(element => {
     element.style.display = "none";
@@ -155,6 +169,10 @@ function hideOptions() {
     element.style.border = "2px solid rgba(103, 103, 103, 0)";
     element.style.zIndex = "0";
   });
+  showForm.forEach(element => {
+    element.style.display = ""
+  });
+  editContent.style.display = "";
   endEdit.style.display = "none";
   endEdit.style.zIndex = "0";
   table.style.zIndex = "0";

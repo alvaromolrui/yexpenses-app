@@ -116,47 +116,20 @@ body {
   box-sizing: border-box;
 }
 
-/* Botón salir del modo edición */
-.endEdit {
-  position:fixed;
-  top: 50px;
-  right: 50px;
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background: #2C2C2C;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.75);
-  transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-}
-
-  .endEdit .closeIcon {
-    stroke: #C8C8C8;
-    width: 25px;
-    fill: none;
-    transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-  }
-
-    .endEdit:hover .closeIcon {
-      stroke: #fff;
-    }
-
-
 /* Topbar */
 .header {
-  z-index: 1;
+  z-index: 20;
   position: fixed;
   top: 0;
   width: 100%;
+  height: 65px;
   border-bottom: 1px solid #2C2C2C;
   background: #1E1E1E;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   box-sizing: border-box;
-  padding: 20px 20px;
+  padding: 0px 20px;
 }
 
   /* Button frame */
@@ -176,16 +149,7 @@ body {
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      gap: 10px;
-      font-family: 'Archivo', sans-serif;
-      font-weight: 600;
-      font-size: 18px;
-      color: #C8C8C8;
       transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-    }
-
-    .header .buttonFrame .showForm:hover {
-      color: #fff;
     }
 
       .header .buttonFrame .showForm .addIcon {
@@ -205,16 +169,7 @@ body {
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      gap: 10px;
-      font-family: 'Archivo', sans-serif;
-      font-weight: 600;
-      font-size: 18px;
-      color: #C8C8C8;
       transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-    }
-
-    .header .buttonFrame .editContent:hover {
-      color: #fff;
     }
 
       .header .buttonFrame .editContent .editIcon {
@@ -225,6 +180,26 @@ body {
 
         .header .buttonFrame .editContent:hover .editIcon {
           fill: #fff;
+        }
+
+    /* Botón salir del modo edición */
+    .header .buttonFrame .endEdit {
+      align-self: flex-end;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+    }
+
+      .header .buttonFrame .endEdit .closeIcon {
+        stroke: #C8C8C8;
+        width: 25px;
+        fill: none;
+        transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+      }
+
+        .header .buttonFrame .endEdit:hover .closeIcon {
+          stroke: #fff;
         }
 
 /* Content */
@@ -397,7 +372,7 @@ body {
   padding: 45px 40px;
   box-sizing: border-box;
   transition: all 0.2s cubic-bezier(0.2,1,0.3,1.2);
-  z-index: 10;
+  z-index: 25;
 }
 
   .formContainer .formTitle {
@@ -464,7 +439,6 @@ body {
   height: 100vh;
   margin: 0 auto;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 9;
+  background: rgba(0, 0, 0, 0.25);
   transition: opacity 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
 }
