@@ -21,21 +21,21 @@ button {
   -moz-appearance: none;
 }
 
-input[type=number] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  margin: 0;
-}
-
 label {
   font-weight: 600;
   font-size: 16px;
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 10px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
 input {
@@ -425,11 +425,12 @@ body {
       padding: 15px 20px;
       width: 100%;
       border-radius: 5px;
+      background: #2C2C2C;
       transition: background 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
 
       .closeForm:hover {
-        background: #2C2C2C;
+        background: #252525;
       }
 
 /* Background popup */

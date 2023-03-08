@@ -195,7 +195,3 @@ function hideOptions() {
     console.error("Error al cargar la tabla:", error);
   });
 }
-
-function showNumericKeyboard(event) {
-  event.target.setAttribute('inputmode', 'numeric');
-}
