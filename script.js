@@ -37,9 +37,14 @@ showForm.forEach(element => {
     backgroundModal.style.visibility = 'visible';
     document.body.style.overflow = "hidden";
 
-    setTimeout(function() {
-      document.getElementById("title").focus();
-    }, 100);
+    new Promise(resolve => {
+      formModal.style.display = "block";
+      resolve();
+    }).then(() => {
+      setTimeout(function() {
+        document.getElementById("title").focus();
+      }, 100);
+    });
   
     const dateControl = document.querySelector('input[type="date"]');
     const currentDate = new Date(); // crea un objeto de fecha con la fecha y hora actual
