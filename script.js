@@ -1,12 +1,14 @@
-// Obtener los elementos del DOM
+/* Constantes */
 const showForm = document.querySelectorAll('.showForm');
+const showFormButton = document.querySelectorAll('.showFormButton');
+const showFormIcon = document.querySelectorAll('.showFormIcon');
 const hideForm = document.getElementById('hideForm');
 const formModal = document.getElementById('formModal');
 const form = document.getElementById("formulario");
 const backgroundModal = document.getElementById("backgroundModal");
 
 
-/* Functions */
+/* Animations */
 
 function modalEntranceKeyframes() {
   return [
@@ -98,9 +100,39 @@ function itemExitOptions() {
   };
 }
 
+function addItemKeyframes() {
+  return [
+    { height: '0px', opacity: 0, padding: '0px' },
+    { height: '124px', opacity: 1, padding: '20px' }
+  ];
+}
+function addItemOptions() {
+  return { 
+    duration: 200, 
+    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
+    iterations: 1, 
+    fill: "forwards" 
+  };
+}
+
+function removeItemKeyframes() {
+  return [
+    { height: '124px', opacity: 1, padding: '20px' },
+    { height: '0px', opacity: 0, padding: '0px' }
+  ];
+}
+function removeItemOptions() {
+  return { 
+    duration: 200, 
+    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
+    iterations: 1, 
+    fill: "forwards" 
+  };
+}
+
 function addItemButtonEntranceKeyframes() {
   return [
-    { height: '93', opacity: 1 },
+    { height: '93px', opacity: 1 },
     { height: '0px', opacity: 0 }
   ];
 }
@@ -128,31 +160,32 @@ function addItemButtonExitOptions() {
   };
 }
 
+
+/* Functions */
+
 // Toggle Modal del formulario
 function showHideForm() {
   var formVisible = formModal.classList.contains("contentVisible");
   
   if (formVisible) {
     formModal.animate(modalExitKeyframes(), modalExitOptions());
-    backgroundModal.animate(backgroundModalExitKeyframes(), backgroundModalExitOptions());
     setTimeout(() => {
       formModal.classList.remove("contentVisible");
-      backgroundModal.classList.remove("contentVisible");
       document.body.style.overflow = "";
     }, 100);
+    showHideBackgroundModal();
   } else {
     formModal.classList.add("contentVisible");
-    backgroundModal.classList.add("contentVisible");
     document.body.style.overflow = "hidden";
+    showHideBackgroundModal();
     setTimeout(() => {
       formModal.animate(modalEntranceKeyframes(), modalEntranceOptions());
-      backgroundModal.animate(backgroundModalEntranceKeyframes(), backgroundModalEntranceOptions());
     }, 0);
   }
 }
 
 // Imprimir fecha actual en el input Date
-function currentDate(){
+function currentDate() {
   const dateControl = document.querySelector('input[type="date"]');
   const currentDate = new Date(); // crea un objeto de fecha con la fecha y hora actual
   const year = currentDate.getFullYear(); // obtiene el año actual
@@ -187,11 +220,125 @@ function saveData(form) {
     const formData = new FormData(form);
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "save_data.php");
+
+    const title = document.querySelector('#title').value;
+    const price = document.querySelector('#price').value;
+    const date = document.querySelector('#date').value;
+    
+    if (!title || !price || !date) {
+      alert('Por favor, complete todos los campos');
+      return;
+    }
     xhr.addEventListener("load", () => {
       resolve();
     });
     xhr.send(formData);
   });
+}
+
+// Fondo oscuro
+function showHideBackgroundModal() {
+  if (backgroundModal.style.display = "flex") {
+    backgroundModal.animate(backgroundModalExitKeyframes(), backgroundModalExitOptions());
+    setTimeout(() => {
+      backgroundModal.classList.remove("contentVisible");
+    }, 200);
+  } else {
+    setTimeout(() => {
+      backgroundModal.classList.add("contentVisible");
+    }, 200);
+    backgroundModal.animate(backgroundModalEntranceKeyframes(), backgroundModalEntranceOptions());
+  }
+}
+
+// Eliminar entrada
+function eliminarFila(id) {
+  // Crear una instancia de XMLHttpRequest
+  var xhttp = new XMLHttpRequest();
+  // Configurar la solicitud AJAX
+  xhttp.open("POST", "delete_data.php", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  // Definir lo que sucede cuando se recibe la respuesta
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      // Manejar la respuesta del servidor aquí
+      var item = document.querySelectorAll(".item");
+      item.forEach(element => {
+        element.getAttribute("data-id");
+        if (id == element.getAttribute("data-id")) {
+          element.animate(removeItemKeyframes(), removeItemOptions());
+          setTimeout(function() {
+            element.style.display = "none";
+          }, 200);
+        }
+      });
+    }
+  };
+  // Enviar la solicitud AJAX
+  xhttp.send("id=" + id);
+}
+
+// Entrar en la edición entradas
+function showHideOptions() {
+  const deleteButtons = document.querySelectorAll(".deleteItem");
+  const item = document.querySelectorAll(".item");
+  const table = document.getElementById("table");
+  const endEdit = document.getElementById("endEdit");
+  const editContent = document.getElementById("editContent");
+
+
+  if (endEdit.style.display = "flex") {
+    window.scrollTo(0, 0);
+    deleteButtons.forEach(element => {
+      element.style.display = "none";
+    });
+    item.forEach(element => {
+      element.style.border = "2px solid rgba(103, 103, 103, 0)";
+      element.style.zIndex = "0";
+      element.animate(itemExitKeyframes(), itemExitOptions());
+    });
+    showFormIcon.forEach(element => {
+      element.style.display = "flex";
+    });
+    showFormButton.forEach(element => {
+      element.style.display = "flex";
+      setTimeout(() => {
+        element.animate(addItemButtonExitKeyframes(), addItemButtonExitOptions());
+      }, 0);
+      
+    });
+    editContent.style.display = "";
+    endEdit.style.display = "none";
+    endEdit.style.zIndex = "0";
+    table.style.zIndex = "0";
+    showHideBackgroundModal();
+  
+    loadData();
+  } else {
+    window.scrollTo(0, 0);
+    deleteButtons.forEach(element => {
+      element.style.display = "flex";
+    });
+    item.forEach(element => {
+      element.style.border = "2px solid rgba(103, 103, 103, 1)";
+      element.style.zIndex = "15";
+      element.animate(itemEntranceKeyframes(), itemEntranceOptions());
+    });
+    showFormIcon.forEach(element => {
+      element.style.display = "none";
+    });
+    showFormButton.forEach(element => {
+      element.animate(addItemButtonEntranceKeyframes(), addItemButtonEntranceOptions());
+      setTimeout(() => {
+        element.style.display = "none";
+      }, 100);
+    });
+    editContent.style.display = "none";
+    endEdit.style.display = "flex";
+    endEdit.style.zIndex = "24";
+    table.style.zIndex = "24"
+    showHideBackgroundModal();
+  }
 }
 
 
@@ -201,9 +348,12 @@ function saveData(form) {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   saveData(form).then(() => {
+    window.scrollTo(0, 0);
     showHideForm();
-    loadData();
     form.reset();
+    setTimeout(() => {
+      loadData();
+    }, 1000);
   });
 });
 
@@ -220,101 +370,29 @@ showForm.forEach(element => {
   });
 });
 
-// Función para enviar la solicitud AJAX al servidor
-function eliminarFila(id) {
-  // Crear una instancia de XMLHttpRequest
-  var xhttp = new XMLHttpRequest();
-  // Configurar la solicitud AJAX
-  xhttp.open("POST", "delete_data.php", true);
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  // Definir lo que sucede cuando se recibe la respuesta
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      // Manejar la respuesta del servidor aquí
-      var item = document.querySelectorAll(".item");
-      item.forEach(element => {
-        element.getAttribute("data-id");
-        if (id == element.getAttribute("data-id")) {
-          element.style.transition = "all 0.2s cubic-bezier(0.4,1,0.3,1)";
-          element.style.opacity = "0";
-          element.style.transform = "translateY(-20px)";
-          element.style.overflow = "hidden";
-          element.style.height = "0";
-          element.style.padding = "0";
-          setTimeout(function() {
-            element.style.display = "none";
-          }, 175);
-        }
-      });
-    }
-  };
-  // Enviar la solicitud AJAX
-  xhttp.send("id=" + id);
-}
+// Cerrar formulario
+hideForm.addEventListener('click', () => {
+  showHideForm();
+  form.reset();
+});
 
-
-
-function showOptions() {
-  const deleteButtons = document.querySelectorAll(".deleteItem");
-  const item = document.querySelectorAll(".item");
-  const table = document.getElementById("table");
-  const endEdit = document.getElementById("endEdit");
-  const editContent = document.getElementById("editContent");
-
-  deleteButtons.forEach(element => {
-    element.style.display = "flex";
-  });
-  item.forEach(element => {
-    element.style.border = "2px solid rgba(103, 103, 103, 1)";
-    element.style.zIndex = "15";
-    element.animate(itemEntranceKeyframes(), itemEntranceOptions());
-  });
-  showForm.forEach(element => {
-    element.animate(addItemButtonEntranceKeyframes(), addItemButtonEntranceOptions());
-    setTimeout(() => {
-      element.style.display = "none";
-    }, 100);
-  });
-  editContent.style.display = "none";
-  endEdit.style.display = "flex";
-  endEdit.style.zIndex = "24";
-  table.style.zIndex = "24"
-  backgroundModal.classList.add("contentVisible");
-  backgroundModal.animate(backgroundModalEntranceKeyframes(), backgroundModalEntranceOptions());
-}
-
-function hideOptions() {
-  const deleteButtons = document.querySelectorAll(".deleteItem");
-  const item = document.querySelectorAll(".item");
-  const table = document.getElementById("table");
-  const endEdit = document.getElementById("endEdit");
-  const editContent = document.getElementById("editContent");
-
-  deleteButtons.forEach(element => {
-    element.style.display = "none";
-  });
-  item.forEach(element => {
-    element.style.border = "2px solid rgba(103, 103, 103, 0)";
-    element.style.zIndex = "0";
-    element.animate(itemExitKeyframes(), itemExitOptions());
-  });
-  showForm.forEach(element => {
-    element.style.display = "flex";
-    setTimeout(() => {
-      element.animate(addItemButtonExitKeyframes(), addItemButtonExitOptions());
-    }, 0);
+endEdit.addEventListener('click', () => {
+  if (formModal.style.display = "none") {
+    showHideOptions();
+  } else {
+    showHideForm();
     
-  });
-  editContent.style.display = "";
-  endEdit.style.display = "none";
-  endEdit.style.zIndex = "0";
-  table.style.zIndex = "0";
-  backgroundModal.classList.remove("contentVisible");
-  backgroundModal.animate(backgroundModalExitKeyframes(), backgroundModalExitOptions());
+  }
+});
 
-  loadData();
-}
-
+editContent.addEventListener('click', () => {
+  if (formModal.style.display = "none") {
+    showHideOptions();
+  } else {
+    showHideForm();
+    showHideOptions();
+  }
+});
 
 // Pintar los datos al cargar la página
 document.addEventListener("DOMContentLoaded", function(event) {
