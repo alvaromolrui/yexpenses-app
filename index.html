@@ -7,22 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="style.css">
-    <title>Proyecto</title>
+    <title>Yexpenses</title>
 </head>
 
 <body>
 
-<!-- Topbar: Botón añadir editar entradas + Botón añadir nueva entrada -->
+<!-- Topbar -->
 <header class="header">
     <div class="buttonFrame">
-        <!-- Botón editar contenido -->
-        <button onclick="showOptions()" id="editContent" class="editContent">
+        <!-- Botón editar -->
+        <button id="editButton" class="editButton">
             <svg class="editIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
                 <path d="M20.748 4.748a3.886 3.886 0 0 0-5.496 0l-7.203 7.203 5.496 5.496 7.203-7.203a3.886 3.886 0 0 0 0-5.496Zm-8.819 14.223-5.404-5.404a4.44 4.44 0 0 0-.624 1.283L4.46 19.654a1.11 1.11 0 0 0 1.382 1.382l4.804-1.44a4.44 4.44 0 0 0 1.283-.625Z"/>
               </svg>
         </button>
-        <!-- Botón mostrar formulario -->
-        <button class="showForm">
+        <!-- Botón añadir -->
+        <button id="addButton" class="addButton">
             <svg class="addIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
                 <g stroke-width="2">
                     <path d="M12.5 5v15m7.5-7.5H5"/>
@@ -30,8 +30,8 @@
                 </g>
             </svg>
         </button>
-        <!-- Botón salir del modo edición -->
-        <button onclick="hideOptions()" id="endEdit" class="endEdit">
+        <!-- Botón salir -->
+        <button id="closeButton" class="closeButton">
             <svg class="closeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
                 <path stroke-width="2" d="M21.343 3.657 3.657 21.343m17.686 0L3.657 3.657"/>
             </svg>
@@ -39,9 +39,10 @@
     </div>
 </header>
 
-<!-- Contenido: Botón añadir nueva entrada + Tabla -->
+<!-- Contenido -->
 <main class="main">
-    <button class="showForm">
+    <!-- Botón principal añadir -->
+    <button id="mainAddButton" class="mainAddButton">
         <svg class="addIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
             <g stroke-width="2">
                 <path d="M12.5 5v15m7.5-7.5H5"/>
@@ -50,28 +51,37 @@
         </svg>              
         Nueva entrada
     </button>
+    <!-- Tabla -->
     <div id="table" class="table"></div>
 </main>
 
-<!-- Ventana: Añadir nueva entrada -->
-<div id="formModal" class="formContainer">
+<!-- Modal formulario -->
+<div id="formModal" class="formModal">
     <h1 class="formTitle">Crea un nuevo item</h1>
     <form id="formulario" class="formulario">
+        <!-- Campo título -->
         <label for="title">Título</label>
-        <input id="title" type="text" name="title" class="name" placeholder="Escribe un título...">
+        <input id="title" type="text" name="title" class="name" placeholder="Escribe un título..." required>
+        <!-- Campo precio -->
         <label for="price">Precio</label>
-        <input id="price" step="0.01" min="0.00" inputmode="numeric" pattern="[0-9]*" type="number" name="price" class="price" placeholder="Escribe el precio...">
+        <input id="price" step="0.01" min="0.00" inputmode="numeric" pattern="[0-9]*" type="number" name="price" class="price" placeholder="Escribe el precio..." required>
+        <!-- Campo fecha -->
         <label for="date">Fecha</label>
-        <input id="date" type="date" name="date" class="date">
+        <input id="date" type="date" name="date" class="date" required>
         <div class="buttomFrame">
-            <button type="submit" id="addItem" class="addItem">+ Añadir elemento</button>
-            <button id="closeForm" class="closeForm">Cancelar</button>
+            <!-- Botón aceptar -->
+            <button type="submit" id="acceptButton" class="acceptButton">+ Aceptar</button>
+            <!-- Botón cancelar -->
+            <button id="cancelButton" class="cancelButton">Cancelar</button>
         </div>
     </form>   
 </div>
 
+<!-- Fondo oscuro -->
 <div id="backgroundModal" class="backgroundModal"></div>
     
 </body>
+
 <script src="script.js"></script>
+
 </html>

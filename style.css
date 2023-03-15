@@ -1,6 +1,7 @@
 /* Estilos de generales */
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap');
 
+/* Reset de estilos */
 * {
   color: #fff;
   font-family: 'Archivo', sans-serif;
@@ -21,11 +22,16 @@ button {
   -moz-appearance: none;
 }
 
-label {
-  font-weight: 600;
-  font-size: 16px;
-  width: 100%;
-  display: flex;
+input {
+  cursor:text;
+  outline: none;
+  border:none;
+  background-image:none;
+  background-color:transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  color-scheme: dark;
 }
 
 input[type="number"] {
@@ -37,35 +43,6 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
-
-input {
-  color-scheme: dark;
-  outline: none;
-  background: none;
-  font-weight: 400;
-  font-size: 16px;
-  display: flex;
-  width: 100%;
-  height: 50px;
-  box-sizing: border-box;
-  border-radius: 5px;
-  padding: 0px 15px;
-  border: 1px solid #4e4e4e;
-  color: #fff;
-  transition: border 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
-}
-    
-  input:hover {
-    border: 1px solid #A0928C;
-  }
-
-  input:focus {
-    border: 1px solid #7fccb2;
-  }
-
-  input::placeholder {
-    color: #676767;
-  }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
@@ -118,7 +95,7 @@ body {
 
 /* Topbar */
 .header {
-  z-index: 20;
+  z-index: 10;
   position: fixed;
   top: 0;
   width: 100%;
@@ -144,7 +121,7 @@ body {
   }
 
     /* Botón mostrar formulario */
-    .header .buttonFrame .showForm {
+    .header .buttonFrame .addButton {
       align-self: flex-end;
       display: flex;
       justify-content: flex-start;
@@ -152,19 +129,19 @@ body {
       transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
 
-      .header .buttonFrame .showForm .addIcon {
+      .header .buttonFrame .addButton .addIcon {
         stroke: #C8C8C8;
         fill: none;
         width: 25px;
         transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
       }
 
-      .header .buttonFrame .showForm:hover .addIcon {
+      .header .buttonFrame .addButton:hover .addIcon {
         stroke: #fff;
       }
 
     /* Botón editar contenidos */
-    .header .buttonFrame .editContent {
+    .header .buttonFrame .editButton {
       align-self: flex-end;
       display: flex;
       justify-content: flex-start;
@@ -172,18 +149,18 @@ body {
       transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
 
-      .header .buttonFrame .editContent .editIcon {
+      .header .buttonFrame .editButton .editIcon {
         fill: #C8C8C8;
         width: 25px;
         transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
       }
 
-        .header .buttonFrame .editContent:hover .editIcon {
+        .header .buttonFrame .editButton:hover .editIcon {
           fill: #fff;
         }
 
     /* Botón salir del modo edición */
-    .header .buttonFrame .endEdit {
+    .header .buttonFrame .closeButton {
       align-self: flex-end;
       display: none;
       justify-content: center;
@@ -191,14 +168,14 @@ body {
       transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
 
-      .header .buttonFrame .endEdit .closeIcon {
+      .header .buttonFrame .closeButton .closeIcon {
         stroke: #C8C8C8;
         width: 25px;
         fill: none;
         transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
       }
 
-        .header .buttonFrame .endEdit:hover .closeIcon {
+        .header .buttonFrame .closeButton:hover .closeIcon {
           stroke: #fff;
         }
 
@@ -218,7 +195,7 @@ body {
 }
 
   /* Botón mostrar formulario */
-  .main .showForm {
+  .main .mainAddButton {
     width: calc(100% - 40px);
     max-width: 800px;
     min-width: 200px;
@@ -236,21 +213,22 @@ body {
     font-weight: 600;
     font-size: 18px;
     color: #C8C8C8;
+    overflow: hidden;
   }
 
-    .main .showForm:hover {
+    .main .mainAddButton:hover {
       color: #fff;
       border: 2px solid #a3a3a3;
     }
 
-      .main .showForm .addIcon {
+      .main .mainAddButton .addIcon {
         width: 25px;
         stroke: #C8C8C8;
         fill: none;
         transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
       }
       
-      .main .showForm:hover .addIcon {
+      .main .mainAddButton:hover .addIcon {
         stroke: #fff;
       }
 
@@ -267,6 +245,7 @@ body {
 }
 
   .table .item {
+    overflow: hidden;
     position: relative;
     cursor: default;
     width: calc(100% - 40px);
@@ -301,7 +280,7 @@ body {
       height: 22px;
     }
 
-    .table .item .itemHeader .deleteItem {
+    .table .item .itemHeader .deleteButton {
       align-self: flex-end;
       width: 22px;
       height: 22px;
@@ -311,7 +290,7 @@ body {
       padding: 5px 0px 0px 0px;
     }
     
-      .table .item .itemHeader .deleteItem div {
+      .table .item .itemHeader .deleteButton div {
         position: absolute;
         width: 15px;
         height: 2px;
@@ -320,16 +299,16 @@ body {
         transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
       }
       
-        .table .item .itemHeader .deleteItem:hover div {
+        .table .item .itemHeader .deleteButton:hover div {
           background: #c41515;
         }
         
-        .table .item .itemHeader .deleteItem:hover div:first-child {
+        .table .item .itemHeader .deleteButton:hover div:first-child {
           transform: rotate(45deg);
           width: 20px;
         }
         
-        .table .item .itemHeader .deleteItem:hover div:last-child {
+        .table .item .itemHeader .deleteButton:hover div:last-child {
           transform: rotate(-45deg);
           width: 20px;
         }
@@ -355,13 +334,14 @@ body {
     }
 
 /* Formulario */
-.formContainer {
+.formModal {
   position: fixed;
   bottom: 0;
   width: 100%;
-  max-width: 800px;
+  max-width: 840px;
   min-width: 200px;
   display: none;
+  opacity: 0;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
@@ -371,17 +351,17 @@ body {
   border-radius: 20px 20px 0px 0px;
   padding: 45px 40px;
   box-sizing: border-box;
-  transition: all 0.2s cubic-bezier(0.2,1,0.3,1.2);
-  z-index: 25;
+  z-index: 3;
+  transform: translateY(0px);
 }
 
-  .formContainer .formTitle {
+  .formModal .formTitle {
     cursor: default;
     width: 100%;
     margin-bottom: 10px;
   }
 
-  .formContainer .formulario {
+  .formModal .formulario {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -390,7 +370,40 @@ body {
     gap: 15px;
   }
 
-  .formContainer .buttomFrame {
+    .formModal .formulario label {
+      font-weight: 600;
+      font-size: 16px;
+      width: 100%;
+      display: flex;
+    }
+
+    .name, .price, .date {
+      font-weight: 400;
+      font-size: 16px;
+      display: flex;
+      width: 100%;
+      height: 50px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding: 0px 15px;
+      border: 1px solid #4e4e4e;
+      color: #fff;
+      transition: border 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+    }
+        
+      .name:hover, .price:hover, .date:hover {
+          border: 1px solid #A0928C;
+        }
+
+      .name:focus, .price:focus, .date:focus {
+        border: 1px solid #7fccb2;
+      }
+
+      .name:placeholder, .price:placeholder, .date:placeholder {
+        color: #676767;
+      }
+
+  .formModal .buttomFrame {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -400,7 +413,7 @@ body {
     gap: 10px;
   }
     
-    .addItem {
+      .formModal .buttomFrame .acceptButton {
       cursor: pointer;
       background: #4bb491;
       color: white;
@@ -414,11 +427,11 @@ body {
       transition: background 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
 
-      .addItem:hover {
+        .formModal .buttomFrame .acceptButton:hover {
         background: #3e987a;
       }
 
-    .closeForm {
+    .formModal .buttomFrame .cancelButton {
       font-family: 'Archivo', sans-serif;
       font-weight: 700;
       font-size: 14px;
@@ -429,17 +442,25 @@ body {
       transition: background 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
 
-      .closeForm:hover {
+      .formModal .buttomFrame .cancelButton:hover {
         background: #252525;
       }
 
 /* Background popup */
 .backgroundModal {
   position: fixed;
+  display: none;
+  opacity: 0;
+  z-index: 2;
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.25);
   transition: opacity 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
+}
+
+/* Clases estado */
+.contentVisible {
+  display: flex;
 }

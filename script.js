@@ -1,109 +1,207 @@
-// Pintar los datos del CSV en el DOM al cargar la página
-document.addEventListener("DOMContentLoaded", function(event) {
-  fetch("read_data.php")
-  .then(function(response) {
-    return response.text();
-  })
-  .then(function(html) {
-    document.getElementById("table").innerHTML = html;
-  })
-  .catch(function(error) {
-    console.error("Error al cargar la tabla:", error);
-  });
-});
-
-// Obtener los elementos del DOM
-const showForm = document.querySelectorAll('.showForm');
-const hideForm = document.getElementById('hideForm');
+/* Constantes */
+const mainAddButton = document.getElementById('mainAddButton');
+const addButton = document.getElementById('addButton');
+const editButton = document.getElementById('editButton');
+const closeButton = document.getElementById('closeButton');
+const acceptButton = document.getElementById('acceptButton');
+const cancelButton = document.getElementById('cancelButton');
 const formModal = document.getElementById('formModal');
+const form = document.getElementById("formulario");
 const backgroundModal = document.getElementById("backgroundModal");
-
-// Ocultar el formulario al cargar la página
-formModal.style.visibility = 'hidden';
-formModal.style.opacity = '0';
-formModal.style.bottom = '-100px';
-backgroundModal.style.zIndex = '';
-backgroundModal.style.opacity = '0';
-backgroundModal.style.visibility = 'hidden';
-
-// Mostrar formulario - Botón +
-showForm.forEach(element => {
-  element.addEventListener('click', () => {
-    new Promise(resolve => {
-      formModal.style.display = "flex";
-      resolve();
-    }).then(() => {
-      document.getElementById("title").focus();
-    });
-    formModal.style.visibility = 'visible';  
-    formModal.style.opacity = '1';
-    formModal.style.bottom = '0px';
-    backgroundModal.style.zIndex = '21';
-    backgroundModal.style.opacity = '1';
-    backgroundModal.style.visibility = 'visible';
-    document.body.style.overflow = "hidden";
+const contentVisible = "contentVisible";
+const table = document.getElementById("table");
 
 
-  
-    const dateControl = document.querySelector('input[type="date"]');
-    const currentDate = new Date(); // crea un objeto de fecha con la fecha y hora actual
-    const year = currentDate.getFullYear(); // obtiene el año actual
-    let month = currentDate.getMonth() + 1; // obtiene el mes actual (los meses empiezan desde 0)
-    month = month < 10 ? '0' + month : month; // agrega un cero delante si el mes es de un solo dígito
-    let day = currentDate.getDate(); // obtiene el día actual
-    day = day < 10 ? '0' + day : day; // agrega un cero delante si el día es de un solo dígito
-    const formattedDate = `${year}-${month}-${day}`; // crea una cadena con la fecha formateada
-    dateControl.value = formattedDate; // establece el valor del input en la fecha actual formateada
+/* Animations */
+
+function modalEntranceKeyframes() {
+  return [
+    { transform: 'translateY(100px)', opacity: 0 },
+    { transform: 'translateY(0px)', opacity: 1 }
+  ];
+}
+
+function modalExitKeyframes() {
+  return [
+    { transform: 'translateY(0px)', opacity: 1 },
+    { transform: 'translateY(100px)', opacity: 0 }
+  ];
+}
+
+function backgroundModalEntranceKeyframes() {
+  return [
+    { opacity: 0 },
+    { opacity: 1 }
+  ];
+}
+
+function backgroundModalExitKeyframes() {
+  return [
+    { opacity: 1 },
+    { opacity: 0 }
+  ];
+}
+
+function itemEntranceKeyframes() {
+  return [
+    { height: '97px' },
+    { height: '124px' }
+  ];
+}
+
+function itemExitKeyframes() {
+  return [
+    { height: '124px' },
+    { height: '97px' }
+  ];
+}
+
+function addItemKeyframes() {
+  return [
+    { height: '0px', opacity: 0, padding: '0px' },
+    { height: '124px', opacity: 1, padding: '20px' }
+  ];
+}
+
+function removeItemKeyframes() {
+  return [
+    { height: '124px', opacity: 1, padding: '20px' },
+    { height: '0px', opacity: 0, padding: '0px' }
+  ];
+}
+
+function addItemButtonEntranceKeyframes() {
+  return [
+    { height: '93px', opacity: 1 },
+    { height: '0px', opacity: 0 }
+  ];
+}
+
+function addItemButtonExitKeyframes() {
+  return [
+    { height: '0px', opacity: 0 },
+    { height: '93px', opacity: 1 }
+  ];
+}
+function baseAnimationOptions() {
+  return { 
+    duration: 200, 
+    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
+    iterations: 1, 
+    fill: "forwards" 
+  };
+}
+
+
+// Abrir formulario
+function openForm() {
+  document.body.style.overflow = "hidden";
+  hideHeaderButtons();
+  closeButton.style.display = "flex";
+  formModal.classList.add(contentVisible);
+  showBackgroundModal();
+  new Promise(resolve => {
+    resolve();
+  }).then(() => {
+    document.getElementById("title").focus();
   });
-});
+  setTimeout(() => {
+    formModal.animate(modalEntranceKeyframes(), baseAnimationOptions());
+  }, 200);
+  setCurrentDate();
+  closeButton.addEventListener('click', (closeForm));
+}
 
+addButton.addEventListener('click', (openForm));
+mainAddButton.addEventListener('click', (openForm));
 
-// Ocultar formulario - Botón Cancelar
-closeForm.addEventListener('click', () => {
-  formModal.style.bottom = '-100px';
-  formModal.style.opacity = '0';
-  formModal.style.visibility = 'hidden';
-  formModal.style.display = "";
-  backgroundModal.style.zIndex = '';
-  backgroundModal.style.opacity = '0';
-  backgroundModal.style.visibility = 'hidden';
+// Cerrar formulario
+function closeForm() {
   document.body.style.overflow = "";
-});
+  showHeaderButtons();
+  closeButton.style.display = "";
+  formModal.animate(modalExitKeyframes(), baseAnimationOptions());
+  hideBackgroundModal();
+  setTimeout(() => {
+    formModal.classList.remove(contentVisible);
+    form.reset();
+  }, 200);
+}
+
+cancelButton.addEventListener('click', (closeForm));
+
+// Mostrar fondo oscuro
+function showBackgroundModal() {
+  setTimeout(() => {
+    backgroundModal.classList.add("contentVisible");
+  }, 200);
+  backgroundModal.animate(backgroundModalEntranceKeyframes(), baseAnimationOptions());
+}
+
+// Ocultar fondo oscuro
+function hideBackgroundModal() {
+  backgroundModal.animate(backgroundModalExitKeyframes(), baseAnimationOptions());
+  setTimeout(() => {
+    backgroundModal.classList.remove("contentVisible");
+  }, 200);
+}
+
+// Obtener fecha actual
+function setCurrentDate() {
+  const dateControl = document.querySelector('input[type="date"]');
+  const currentDate = new Date(); // crea un objeto de fecha con la fecha y hora actual
+  const year = currentDate.getFullYear(); // obtiene el año actual
+  let month = currentDate.getMonth() + 1; // obtiene el mes actual (los meses empiezan desde 0)
+  month = month < 10 ? '0' + month : month; // agrega un cero delante si el mes es de un solo dígito
+  let day = currentDate.getDate(); // obtiene el día actual
+  day = day < 10 ? '0' + day : day; // agrega un cero delante si el día es de un solo dígito
+  const formattedDate = `${year}-${month}-${day}`; // crea una cadena con la fecha formateada
+  dateControl.value = formattedDate; // establece el valor del input en la fecha actual formateada
+}
+
+
+
+// Pintar los datos del CSV en el DOM
+function loadData() {
+  return new Promise((resolve) => {
+    fetch("read_data.php")
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(html) {
+      document.getElementById("table").innerHTML = html;
+    })
+    .catch(function(error) {
+      console.error("Error al cargar la tabla:", error);
+    });
+    resolve();
+  });
+}
 
 // Enviar datos del formulario a php
-const form = document.getElementById("formulario");
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-  const formData = new FormData(form);
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "save_data.php");
-  xhr.send(formData);
-  formModal.style.bottom = '-100px';
-  formModal.style.opacity = '0';
-  formModal.style.visibility = 'hidden';
-  backgroundModal.style.zIndex = '';
-  backgroundModal.style.opacity = '0';
-  backgroundModal.style.visibility = 'hidden';
-  document.body.style.overflow = "";
+function saveData(form) {
+  return new Promise((resolve) => {
+    const formData = new FormData(form);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "save_data.php");
 
-  // Formatear el formulario
-  document.getElementById("formulario").reset();
-
-  // Volver a pintar datos del csv
-  fetch("read_data.php")
-  .then(function(response) {
-    return response.text();
-  })
-  .then(function(html) {
-    document.getElementById("table").innerHTML = html;
-  })
-  .catch(function(error) {
-    console.error("Error al cargar la tabla:", error);
+    const title = document.querySelector('#title').value;
+    const price = document.querySelector('#price').value;
+    const date = document.querySelector('#date').value;
+    
+    if (!title || !price || !date) {
+      alert('Por favor, complete todos los campos');
+      return;
+    }
+    xhr.addEventListener("load", () => {
+      resolve();
+    });
+    xhr.send(formData);
   });
-});
+}
 
 
-// Función para enviar la solicitud AJAX al servidor
+// Eliminar entrada
 function eliminarFila(id) {
   // Crear una instancia de XMLHttpRequest
   var xhttp = new XMLHttpRequest();
@@ -118,15 +216,10 @@ function eliminarFila(id) {
       item.forEach(element => {
         element.getAttribute("data-id");
         if (id == element.getAttribute("data-id")) {
-          element.style.transition = "all 0.2s cubic-bezier(0.4,1,0.3,1)";
-          element.style.opacity = "0";
-          element.style.transform = "translateY(-20px)";
-          element.style.overflow = "hidden";
-          element.style.height = "0";
-          element.style.padding = "0";
+          element.animate(removeItemKeyframes(), baseAnimationOptions());
           setTimeout(function() {
             element.style.display = "none";
-          }, 175);
+          }, 200);
         }
       });
     }
@@ -135,63 +228,89 @@ function eliminarFila(id) {
   xhttp.send("id=" + id);
 }
 
-function showOptions() {
-  const deleteButtons = document.querySelectorAll(".deleteItem");
-  const item = document.querySelectorAll(".item");
-  const table = document.getElementById("table");
-  const endEdit = document.getElementById("endEdit");
-  const editContent = document.getElementById("editContent");
+// Ocultar botones de la topbar
+function hideHeaderButtons() {
+  addButton.style.display = "none";
+  editButton.style.display = "none";
+}
 
-  deleteButtons.forEach(element => {
+// Mostrar botones de la topbar
+function showHeaderButtons() {
+  addButton.style.display = "";
+  editButton.style.display = "";
+}
+
+// Ocultar botón principal de añadir
+function hideMainAddButton() {
+  mainAddButton.animate(addItemButtonEntranceKeyframes(), baseAnimationOptions());
+  setTimeout(() => {
+    mainAddButton.style.display = "none";
+  }, 200);
+}
+
+// Mostrar botón principal de añadir
+function showMainAddButton() {
+  mainAddButton.style.display = "";
+  setTimeout(() => {
+    mainAddButton.animate(addItemButtonExitKeyframes(), baseAnimationOptions());
+  }, 0);
+}
+
+// Editar contenido
+function editContent() {
+  const deleteButton = document.querySelectorAll(".deleteButton");
+  const item = document.querySelectorAll(".item");
+  window.scrollTo(0, 0);
+  hideHeaderButtons();
+  showBackgroundModal();
+  closeButton.style.display = "flex";
+  deleteButton.forEach(element => {
     element.style.display = "flex";
   });
   item.forEach(element => {
     element.style.border = "2px solid rgba(103, 103, 103, 1)";
     element.style.zIndex = "15";
+    element.animate(itemEntranceKeyframes(), baseAnimationOptions());
   });
-  showForm.forEach(element => {
-    element.style.display = "none"
-  });
-  editContent.style.display = "none";
-  endEdit.style.display = "flex";
-  endEdit.style.zIndex = "15";
-  table.style.zIndex = "15";
-  backgroundModal.style.opacity = '1';
-  backgroundModal.style.visibility = 'visible';
+  hideMainAddButton();
+  table.style.zIndex = "24";
+  closeButton.addEventListener('click', (finishEdition));
 }
 
-function hideOptions() {
-  const deleteButtons = document.querySelectorAll(".deleteItem");
-  const item = document.querySelectorAll(".item");
-  const table = document.getElementById("table");
-  const endEdit = document.getElementById("endEdit");
-  const editContent = document.getElementById("editContent");
+editButton.addEventListener('click', (editContent));
 
-  deleteButtons.forEach(element => {
-    element.style.display = "none";
+// Terminar edición
+function finishEdition() {
+  const deleteButton = document.querySelectorAll(".deleteButton");
+  const item = document.querySelectorAll(".item");
+  window.scrollTo(0, 0);
+  showHeaderButtons();
+  hideBackgroundModal();
+  closeButton.style.display = "";
+  deleteButton.forEach(element => {
+    element.style.display = "";
   });
   item.forEach(element => {
-    element.style.border = "2px solid rgba(103, 103, 103, 0)";
-    element.style.zIndex = "0";
+    element.style.border = "";
+    element.style.zIndex = "";
+    element.animate(itemExitKeyframes(), baseAnimationOptions());
   });
-  showForm.forEach(element => {
-    element.style.display = ""
-  });
-  editContent.style.display = "";
-  endEdit.style.display = "none";
-  endEdit.style.zIndex = "0";
-  table.style.zIndex = "0";
-  backgroundModal.style.opacity = '0';
-  backgroundModal.style.visibility = 'hidden';
-
-  fetch("read_data.php")
-  .then(function(response) {
-    return response.text();
-  })
-  .then(function(html) {
-    document.getElementById("table").innerHTML = html;
-  })
-  .catch(function(error) {
-    console.error("Error al cargar la tabla:", error);
-  });
+  showMainAddButton();
+  table.style.zIndex = "";
+  loadData();
 }
+
+// Añadir nueva entrada
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  saveData(form).then(() => {
+    window.scrollTo(0, 0);
+    closeForm();
+    loadData();
+  });
+});
+
+// Pintar los datos al cargar la página
+document.addEventListener("DOMContentLoaded", function(event) {
+  loadData();
+});
