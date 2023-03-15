@@ -121,7 +121,7 @@ body {
   }
 
     /* Botón mostrar formulario */
-    .header .buttonFrame .showForm {
+    .header .buttonFrame .addButton {
       align-self: flex-end;
       display: flex;
       justify-content: flex-start;
@@ -129,19 +129,19 @@ body {
       transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
 
-      .header .buttonFrame .showForm .addIcon {
+      .header .buttonFrame .addButton .addIcon {
         stroke: #C8C8C8;
         fill: none;
         width: 25px;
         transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
       }
 
-      .header .buttonFrame .showForm:hover .addIcon {
+      .header .buttonFrame .addButton:hover .addIcon {
         stroke: #fff;
       }
 
     /* Botón editar contenidos */
-    .header .buttonFrame .editContent {
+    .header .buttonFrame .editButton {
       align-self: flex-end;
       display: flex;
       justify-content: flex-start;
@@ -149,18 +149,18 @@ body {
       transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
 
-      .header .buttonFrame .editContent .editIcon {
+      .header .buttonFrame .editButton .editIcon {
         fill: #C8C8C8;
         width: 25px;
         transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
       }
 
-        .header .buttonFrame .editContent:hover .editIcon {
+        .header .buttonFrame .editButton:hover .editIcon {
           fill: #fff;
         }
 
     /* Botón salir del modo edición */
-    .header .buttonFrame .endEdit {
+    .header .buttonFrame .closeButton {
       align-self: flex-end;
       display: none;
       justify-content: center;
@@ -168,14 +168,14 @@ body {
       transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
 
-      .header .buttonFrame .endEdit .closeIcon {
+      .header .buttonFrame .closeButton .closeIcon {
         stroke: #C8C8C8;
         width: 25px;
         fill: none;
         transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
       }
 
-        .header .buttonFrame .endEdit:hover .closeIcon {
+        .header .buttonFrame .closeButton:hover .closeIcon {
           stroke: #fff;
         }
 
@@ -195,7 +195,7 @@ body {
 }
 
   /* Botón mostrar formulario */
-  .main .showForm {
+  .main .mainAddButton {
     width: calc(100% - 40px);
     max-width: 800px;
     min-width: 200px;
@@ -216,19 +216,19 @@ body {
     overflow: hidden;
   }
 
-    .main .showForm:hover {
+    .main .mainAddButton:hover {
       color: #fff;
       border: 2px solid #a3a3a3;
     }
 
-      .main .showForm .addIcon {
+      .main .mainAddButton .addIcon {
         width: 25px;
         stroke: #C8C8C8;
         fill: none;
         transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
       }
       
-      .main .showForm:hover .addIcon {
+      .main .mainAddButton:hover .addIcon {
         stroke: #fff;
       }
 
@@ -413,7 +413,7 @@ body {
     gap: 10px;
   }
     
-    .addItem {
+      .formModal .buttomFrame .acceptButton {
       cursor: pointer;
       background: #4bb491;
       color: white;
@@ -427,11 +427,11 @@ body {
       transition: background 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
 
-      .addItem:hover {
+        .formModal .buttomFrame .acceptButton:hover {
         background: #3e987a;
       }
 
-    .hideForm {
+    .formModal .buttomFrame .cancelButton {
       font-family: 'Archivo', sans-serif;
       font-weight: 700;
       font-size: 14px;
@@ -442,7 +442,7 @@ body {
       transition: background 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
 
-      .hideForm:hover {
+      .formModal .buttomFrame .cancelButton:hover {
         background: #252525;
       }
 

@@ -1,11 +1,19 @@
 /* Constantes */
-const showForm = document.querySelectorAll('.showForm');
-const showFormButton = document.querySelectorAll('.showFormButton');
-const showFormIcon = document.querySelectorAll('.showFormIcon');
-const hideForm = document.getElementById('hideForm');
+const mainAddButton = document.getElementById('mainAddButton');
+const addButton = document.getElementById('addButton');
+const editButton = document.getElementById('editButton');
+const closeButton = document.getElementById('closeButton');
+const acceptButton = document.getElementById('acceptButton');
+const cancelButton = document.getElementById('cancelButton');
 const formModal = document.getElementById('formModal');
 const form = document.getElementById("formulario");
 const backgroundModal = document.getElementById("backgroundModal");
+const contentVisible = "contentVisible";
+
+const deleteButton = document.querySelectorAll(".deleteButton");
+const item = document.querySelectorAll(".item");
+const table = document.getElementById("table");
+
 
 
 /* Animations */
@@ -16,28 +24,12 @@ function modalEntranceKeyframes() {
     { transform: 'translateY(0px)', opacity: 1 }
   ];
 }
-function modalEntranceOptions() {
-  return { 
-    duration: 200, 
-    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
-    iterations: 1, 
-    fill: "forwards" 
-  };
-}
 
 function modalExitKeyframes() {
   return [
     { transform: 'translateY(0px)', opacity: 1 },
     { transform: 'translateY(100px)', opacity: 0 }
   ];
-}
-function modalExitOptions() {
-  return { 
-    duration: 200, 
-    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
-    iterations: 1, 
-    fill: "forwards" 
-  };
 }
 
 function backgroundModalEntranceKeyframes() {
@@ -46,28 +38,12 @@ function backgroundModalEntranceKeyframes() {
     { opacity: 1 }
   ];
 }
-function backgroundModalEntranceOptions() {
-  return { 
-    duration: 200, 
-    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
-    iterations: 1, 
-    fill: "forwards" 
-  };
-}
 
 function backgroundModalExitKeyframes() {
   return [
     { opacity: 1 },
     { opacity: 0 }
   ];
-}
-function backgroundModalExitOptions() {
-  return { 
-    duration: 200, 
-    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
-    iterations: 1, 
-    fill: "forwards" 
-  };
 }
 
 function itemEntranceKeyframes() {
@@ -76,28 +52,12 @@ function itemEntranceKeyframes() {
     { height: '124px' }
   ];
 }
-function itemEntranceOptions() {
-  return { 
-    duration: 200, 
-    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
-    iterations: 1, 
-    fill: "forwards" 
-  };
-}
 
 function itemExitKeyframes() {
   return [
     { height: '124px' },
     { height: '97px' }
   ];
-}
-function itemExitOptions() {
-  return { 
-    duration: 200, 
-    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
-    iterations: 1, 
-    fill: "forwards" 
-  };
 }
 
 function addItemKeyframes() {
@@ -106,28 +66,12 @@ function addItemKeyframes() {
     { height: '124px', opacity: 1, padding: '20px' }
   ];
 }
-function addItemOptions() {
-  return { 
-    duration: 200, 
-    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
-    iterations: 1, 
-    fill: "forwards" 
-  };
-}
 
 function removeItemKeyframes() {
   return [
     { height: '124px', opacity: 1, padding: '20px' },
     { height: '0px', opacity: 0, padding: '0px' }
   ];
-}
-function removeItemOptions() {
-  return { 
-    duration: 200, 
-    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
-    iterations: 1, 
-    fill: "forwards" 
-  };
 }
 
 function addItemButtonEntranceKeyframes() {
@@ -136,14 +80,6 @@ function addItemButtonEntranceKeyframes() {
     { height: '0px', opacity: 0 }
   ];
 }
-function addItemButtonEntranceOptions() {
-  return { 
-    duration: 200, 
-    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
-    iterations: 1, 
-    fill: "forwards" 
-  };
-}
 
 function addItemButtonExitKeyframes() {
   return [
@@ -151,7 +87,7 @@ function addItemButtonExitKeyframes() {
     { height: '93px', opacity: 1 }
   ];
 }
-function addItemButtonExitOptions() {
+function baseAnimationOptions() {
   return { 
     duration: 200, 
     easing: "cubic-bezier(0.2,1,0.3,1.2)", 
@@ -161,31 +97,56 @@ function addItemButtonExitOptions() {
 }
 
 
-/* Functions */
-
-// Toggle Modal del formulario
-function showHideForm() {
-  var formVisible = formModal.classList.contains("contentVisible");
-  
-  if (formVisible) {
-    formModal.animate(modalExitKeyframes(), modalExitOptions());
-    setTimeout(() => {
-      formModal.classList.remove("contentVisible");
-      document.body.style.overflow = "";
-    }, 100);
-    showHideBackgroundModal();
-  } else {
-    formModal.classList.add("contentVisible");
-    document.body.style.overflow = "hidden";
-    showHideBackgroundModal();
-    setTimeout(() => {
-      formModal.animate(modalEntranceKeyframes(), modalEntranceOptions());
-    }, 0);
-  }
+// Abrir formulario
+function openForm() {
+  document.body.style.overflow = "hidden";
+  formModal.classList.add(contentVisible);
+  showBackgroundModal();
+  new Promise(resolve => {
+    resolve();
+  }).then(() => {
+    document.getElementById("title").focus();
+  });
+  setTimeout(() => {
+    formModal.animate(modalEntranceKeyframes(), baseAnimationOptions());
+  }, 200);
+  setCurrentDate();
 }
 
-// Imprimir fecha actual en el input Date
-function currentDate() {
+addButton.addEventListener('click', (openForm));
+mainAddButton.addEventListener('click', (openForm));
+
+// Cerrar formulario
+function closeForm() {
+  document.body.style.overflow = "";
+  formModal.animate(modalExitKeyframes(), baseAnimationOptions());
+  hideBackgroundModal();
+  setTimeout(() => {
+    formModal.classList.remove(contentVisible);
+    form.reset();
+  }, 200);
+}
+
+cancelButton.addEventListener('click', (closeForm));
+
+// Mostrar fondo oscuro
+function showBackgroundModal() {
+  setTimeout(() => {
+    backgroundModal.classList.add("contentVisible");
+  }, 200);
+  backgroundModal.animate(backgroundModalEntranceKeyframes(), baseAnimationOptions());
+}
+
+// Ocultar fondo oscuro
+function hideBackgroundModal() {
+  backgroundModal.animate(backgroundModalExitKeyframes(), baseAnimationOptions());
+  setTimeout(() => {
+    backgroundModal.classList.remove("contentVisible");
+  }, 200);
+}
+
+// Obtener fecha actual
+function setCurrentDate() {
   const dateControl = document.querySelector('input[type="date"]');
   const currentDate = new Date(); // crea un objeto de fecha con la fecha y hora actual
   const year = currentDate.getFullYear(); // obtiene el año actual
@@ -236,20 +197,7 @@ function saveData(form) {
   });
 }
 
-// Fondo oscuro
-function showHideBackgroundModal() {
-  if (backgroundModal.style.display = "flex") {
-    backgroundModal.animate(backgroundModalExitKeyframes(), backgroundModalExitOptions());
-    setTimeout(() => {
-      backgroundModal.classList.remove("contentVisible");
-    }, 200);
-  } else {
-    setTimeout(() => {
-      backgroundModal.classList.add("contentVisible");
-    }, 200);
-    backgroundModal.animate(backgroundModalEntranceKeyframes(), backgroundModalEntranceOptions());
-  }
-}
+
 
 // Eliminar entrada
 function eliminarFila(id) {
@@ -278,68 +226,66 @@ function eliminarFila(id) {
   xhttp.send("id=" + id);
 }
 
-// Entrar en la edición entradas
-function showHideOptions() {
-  const deleteButtons = document.querySelectorAll(".deleteItem");
-  const item = document.querySelectorAll(".item");
-  const table = document.getElementById("table");
-  const endEdit = document.getElementById("endEdit");
-  const editContent = document.getElementById("editContent");
-
-
-  if (endEdit.style.display = "flex") {
-    window.scrollTo(0, 0);
-    deleteButtons.forEach(element => {
-      element.style.display = "none";
-    });
-    item.forEach(element => {
-      element.style.border = "2px solid rgba(103, 103, 103, 0)";
-      element.style.zIndex = "0";
-      element.animate(itemExitKeyframes(), itemExitOptions());
-    });
-    showFormIcon.forEach(element => {
-      element.style.display = "flex";
-    });
-    showFormButton.forEach(element => {
-      element.style.display = "flex";
-      setTimeout(() => {
-        element.animate(addItemButtonExitKeyframes(), addItemButtonExitOptions());
-      }, 0);
-      
-    });
-    editContent.style.display = "";
-    endEdit.style.display = "none";
-    endEdit.style.zIndex = "0";
-    table.style.zIndex = "0";
-    showHideBackgroundModal();
-  
-    loadData();
-  } else {
-    window.scrollTo(0, 0);
-    deleteButtons.forEach(element => {
-      element.style.display = "flex";
-    });
-    item.forEach(element => {
-      element.style.border = "2px solid rgba(103, 103, 103, 1)";
-      element.style.zIndex = "15";
-      element.animate(itemEntranceKeyframes(), itemEntranceOptions());
-    });
-    showFormIcon.forEach(element => {
-      element.style.display = "none";
-    });
-    showFormButton.forEach(element => {
-      element.animate(addItemButtonEntranceKeyframes(), addItemButtonEntranceOptions());
-      setTimeout(() => {
-        element.style.display = "none";
-      }, 100);
-    });
-    editContent.style.display = "none";
-    endEdit.style.display = "flex";
-    endEdit.style.zIndex = "24";
-    table.style.zIndex = "24"
-    showHideBackgroundModal();
-  }
+function hideHeaderButtons() {
+  addButton.style.display = "none";
+  editButton.style.display = "none";
 }
+
+function showHeaderButtons() {
+  addButton.style.display = "";
+  editButton.style.display = "";
+}
+
+function hideMainAddButton() {
+  mainAddButton.animate(addItemButtonEntranceKeyframes(), baseAnimationOptions());
+  setTimeout(() => {
+    mainAddButton.style.display = "none";
+  }, 200);
+}
+
+function showMainAddButton() {
+  mainAddButton.style.display = "";
+  setTimeout(() => {
+    mainAddButton.animate(addItemButtonExitKeyframes(), baseAnimationOptions());
+  }, 0);
+}
+
+function editContent () {
+  window.scrollTo(0, 0);
+  hideHeaderButtons();
+  closeButton.style.display = "flex";
+  deleteButton.forEach(element => {
+    element.style.display = "flex";
+  });
+  item.forEach(element => {
+    element.style.border = "2px solid rgba(103, 103, 103, 1)";
+    element.style.zIndex = "15";
+    element.animate(itemEntranceKeyframes(), baseAnimationOptions());
+  });
+  hideMainAddButton();
+  table.style.zIndex = "24";
+}
+
+editButton.addEventListener('click', (editContent));
+
+function finishEdition() {
+  window.scrollTo(0, 0);
+  showHeaderButtons();
+  closeButton.style.display = "";
+  deleteButton.forEach(element => {
+    element.style.display = "";
+  });
+  item.forEach(element => {
+    element.style.border = "";
+    element.style.zIndex = "";
+    element.animate(itemExitKeyframes(), baseAnimationOptions());
+  });
+  showMainAddButton();
+  table.style.zIndex = "";
+  loadData();
+}
+
+closeButton.addEventListener('click', (finishEdition));
 
 
 /* Listeners */
@@ -349,47 +295,25 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   saveData(form).then(() => {
     window.scrollTo(0, 0);
-    showHideForm();
-    form.reset();
-    setTimeout(() => {
-      loadData();
-    }, 1000);
+    closeForm();
+    loadData();
   });
 });
 
-// Mostrar formulario
-showForm.forEach(element => {
-  element.addEventListener('click', () => {
-    new Promise(resolve => {
-      resolve();
-    }).then(() => {
-      document.getElementById("title").focus();
-    });
-    showHideForm();
-    currentDate();
-  });
-});
-
-// Cerrar formulario
-hideForm.addEventListener('click', () => {
-  showHideForm();
-  form.reset();
-});
-
-endEdit.addEventListener('click', () => {
+closeButton.addEventListener('click', () => {
   if (formModal.style.display = "none") {
     showHideOptions();
+  } else if (formModal.style.display = "flex") {
+    closeForm();
   } else {
-    showHideForm();
-    
+
   }
 });
 
-editContent.addEventListener('click', () => {
+editButton.addEventListener('click', () => {
   if (formModal.style.display = "none") {
     showHideOptions();
   } else {
-    showHideForm();
     showHideOptions();
   }
 });

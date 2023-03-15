@@ -23,7 +23,7 @@ foreach ($datos_invertidos as $fila) {
   echo '<div class="item" data-id="' . $id . '">';
 
     echo '<div class="itemHeader">';
-    echo "<button class='deleteItem' onclick='eliminarFila(\"" . $id . "\")'>";
+    echo "<button class='deleteButton' onclick='eliminarFila(\"" . $id . "\")'>";
         echo '<div>' . "</div>";
         echo '<div>' . "</div>";
       echo "</button>";
