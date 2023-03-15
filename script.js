@@ -83,10 +83,11 @@ function addItemButtonExitKeyframes() {
     { height: '93px', opacity: 1 }
   ];
 }
+
 function baseAnimationOptions() {
   return { 
     duration: 200, 
-    easing: "cubic-bezier(0.2,1,0.3,1.2)", 
+    easing: "cubic-bezier(0.2,0.5,0.3,1)", 
     iterations: 1, 
     fill: "forwards" 
   };
@@ -269,11 +270,11 @@ function editContent() {
   });
   item.forEach(element => {
     element.style.border = "2px solid rgba(103, 103, 103, 1)";
-    element.style.zIndex = "15";
+    element.style.zIndex = "5";
     element.animate(itemEntranceKeyframes(), baseAnimationOptions());
   });
   hideMainAddButton();
-  table.style.zIndex = "24";
+
   closeButton.addEventListener('click', (finishEdition));
 }
 
