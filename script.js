@@ -297,7 +297,6 @@ function finishEdition() {
     element.animate(itemExitKeyframes(), baseAnimationOptions());
   });
   showMainAddButton();
-  table.style.zIndex = "";
   loadData();
 }
 
