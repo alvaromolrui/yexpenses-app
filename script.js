@@ -9,11 +9,7 @@ const formModal = document.getElementById('formModal');
 const form = document.getElementById("formulario");
 const backgroundModal = document.getElementById("backgroundModal");
 const contentVisible = "contentVisible";
-
-const deleteButton = document.querySelectorAll(".deleteButton");
-const item = document.querySelectorAll(".item");
 const table = document.getElementById("table");
-
 
 
 /* Animations */
@@ -100,6 +96,8 @@ function baseAnimationOptions() {
 // Abrir formulario
 function openForm() {
   document.body.style.overflow = "hidden";
+  hideHeaderButtons();
+  closeButton.style.display = "flex";
   formModal.classList.add(contentVisible);
   showBackgroundModal();
   new Promise(resolve => {
@@ -111,6 +109,7 @@ function openForm() {
     formModal.animate(modalEntranceKeyframes(), baseAnimationOptions());
   }, 200);
   setCurrentDate();
+  closeButton.addEventListener('click', (closeForm));
 }
 
 addButton.addEventListener('click', (openForm));
@@ -119,6 +118,8 @@ mainAddButton.addEventListener('click', (openForm));
 // Cerrar formulario
 function closeForm() {
   document.body.style.overflow = "";
+  showHeaderButtons();
+  closeButton.style.display = "";
   formModal.animate(modalExitKeyframes(), baseAnimationOptions());
   hideBackgroundModal();
   setTimeout(() => {
@@ -157,6 +158,8 @@ function setCurrentDate() {
   const formattedDate = `${year}-${month}-${day}`; // crea una cadena con la fecha formateada
   dateControl.value = formattedDate; // establece el valor del input en la fecha actual formateada
 }
+
+
 
 // Pintar los datos del CSV en el DOM
 function loadData() {
@@ -198,7 +201,6 @@ function saveData(form) {
 }
 
 
-
 // Eliminar entrada
 function eliminarFila(id) {
   // Crear una instancia de XMLHttpRequest
@@ -214,7 +216,7 @@ function eliminarFila(id) {
       item.forEach(element => {
         element.getAttribute("data-id");
         if (id == element.getAttribute("data-id")) {
-          element.animate(removeItemKeyframes(), removeItemOptions());
+          element.animate(removeItemKeyframes(), baseAnimationOptions());
           setTimeout(function() {
             element.style.display = "none";
           }, 200);
@@ -226,16 +228,19 @@ function eliminarFila(id) {
   xhttp.send("id=" + id);
 }
 
+// Ocultar botones de la topbar
 function hideHeaderButtons() {
   addButton.style.display = "none";
   editButton.style.display = "none";
 }
 
+// Mostrar botones de la topbar
 function showHeaderButtons() {
   addButton.style.display = "";
   editButton.style.display = "";
 }
 
+// Ocultar botón principal de añadir
 function hideMainAddButton() {
   mainAddButton.animate(addItemButtonEntranceKeyframes(), baseAnimationOptions());
   setTimeout(() => {
@@ -243,6 +248,7 @@ function hideMainAddButton() {
   }, 200);
 }
 
+// Mostrar botón principal de añadir
 function showMainAddButton() {
   mainAddButton.style.display = "";
   setTimeout(() => {
@@ -250,9 +256,13 @@ function showMainAddButton() {
   }, 0);
 }
 
-function editContent () {
+// Editar contenido
+function editContent() {
+  const deleteButton = document.querySelectorAll(".deleteButton");
+  const item = document.querySelectorAll(".item");
   window.scrollTo(0, 0);
   hideHeaderButtons();
+  showBackgroundModal();
   closeButton.style.display = "flex";
   deleteButton.forEach(element => {
     element.style.display = "flex";
@@ -264,13 +274,18 @@ function editContent () {
   });
   hideMainAddButton();
   table.style.zIndex = "24";
+  closeButton.addEventListener('click', (finishEdition));
 }
 
 editButton.addEventListener('click', (editContent));
 
+// Terminar edición
 function finishEdition() {
+  const deleteButton = document.querySelectorAll(".deleteButton");
+  const item = document.querySelectorAll(".item");
   window.scrollTo(0, 0);
   showHeaderButtons();
+  hideBackgroundModal();
   closeButton.style.display = "";
   deleteButton.forEach(element => {
     element.style.display = "";
@@ -285,11 +300,6 @@ function finishEdition() {
   loadData();
 }
 
-closeButton.addEventListener('click', (finishEdition));
-
-
-/* Listeners */
-
 // Añadir nueva entrada
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -298,24 +308,6 @@ form.addEventListener("submit", (event) => {
     closeForm();
     loadData();
   });
-});
-
-closeButton.addEventListener('click', () => {
-  if (formModal.style.display = "none") {
-    showHideOptions();
-  } else if (formModal.style.display = "flex") {
-    closeForm();
-  } else {
-
-  }
-});
-
-editButton.addEventListener('click', () => {
-  if (formModal.style.display = "none") {
-    showHideOptions();
-  } else {
-    showHideOptions();
-  }
 });
 
 // Pintar los datos al cargar la página

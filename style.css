@@ -280,7 +280,7 @@ body {
       height: 22px;
     }
 
-    .table .item .itemHeader .deleteItem {
+    .table .item .itemHeader .deleteButton {
       align-self: flex-end;
       width: 22px;
       height: 22px;
@@ -290,7 +290,7 @@ body {
       padding: 5px 0px 0px 0px;
     }
     
-      .table .item .itemHeader .deleteItem div {
+      .table .item .itemHeader .deleteButton div {
         position: absolute;
         width: 15px;
         height: 2px;
@@ -299,16 +299,16 @@ body {
         transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
       }
       
-        .table .item .itemHeader .deleteItem:hover div {
+        .table .item .itemHeader .deleteButton:hover div {
           background: #c41515;
         }
         
-        .table .item .itemHeader .deleteItem:hover div:first-child {
+        .table .item .itemHeader .deleteButton:hover div:first-child {
           transform: rotate(45deg);
           width: 20px;
         }
         
-        .table .item .itemHeader .deleteItem:hover div:last-child {
+        .table .item .itemHeader .deleteButton:hover div:last-child {
           transform: rotate(-45deg);
           width: 20px;
         }
