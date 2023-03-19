@@ -1,8 +1,8 @@
 {
     "remotePath": "/dev.yexpenses.curvaturaestudio.com",
-    "host": "ftp.curvaturaestudio.com",
-    "username": "alvaromolrui@curvaturaestudio.com",
-    "password": "gQNWrr^ABFtBeT#dj9+^AkF!",
+    "host": ${{ secrets.FTP_SERVER }},
+    "username": ${{ secrets.FTP_USERNAME }},
+    "password": ${{ secrets.FTP_PASSWD }},
     "port": 21,
     "secure": false,
     "protocol": "ftp",
