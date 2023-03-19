@@ -1,8 +1,8 @@
 {
     "remotePath": "/dev.yexpenses.curvaturaestudio.com",
-    "host": "{FTP_SERVER}",
-    "username": "{FTP_USERNAME}",
-    "password": "{FTP_PSSWD}",
+    "host": ${{ secrets.FTP_SERVER }},
+    "username": ${{ secrets.FTP_USERNAME }},
+    "password": ${{ secrets.FTP_PASSWD }},
     "port": 21,
     "secure": false,
     "protocol": "ftp",
