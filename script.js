@@ -1,5 +1,3 @@
-import { modalEntranceKeyframes, modalExitKeyframes, backgroundModalEntranceKeyframes, backgroundModalExitKeyframes, itemEntranceKeyframes, itemExitKeyframes, addItemKeyframes, removeItemKeyframes, addItemButtonEntranceKeyframes, addItemButtonExitKeyframes, baseAnimationOptions } from './animations.js';
-
 /* Constantes */
 const mainAddButton = document.getElementById('mainAddButton');
 const addButton = document.getElementById('addButton');
@@ -13,6 +11,84 @@ const backgroundModal = document.getElementById("backgroundModal");
 const contentVisible = "contentVisible";
 const table = document.getElementById("table");
 
+function modalEntranceKeyframes() {
+  return [
+    { transform: 'translateY(100px)', opacity: 0 },
+    { transform: 'translateY(0px)', opacity: 1 }
+  ];
+}
+
+function modalExitKeyframes() {
+  return [
+    { transform: 'translateY(0px)', opacity: 1 },
+    { transform: 'translateY(100px)', opacity: 0 }
+  ];
+}
+
+function backgroundModalEntranceKeyframes() {
+  return [
+    { opacity: 0 },
+    { opacity: 1 }
+  ];
+}
+
+function backgroundModalExitKeyframes() {
+  return [
+    { opacity: 1 },
+    { opacity: 0 }
+  ];
+}
+
+function itemEntranceKeyframes() {
+  return [
+    { height: '97px' },
+    { height: '124px' }
+  ];
+}
+
+function itemExitKeyframes() {
+  return [
+    { height: '124px' },
+    { height: '97px' }
+  ];
+}
+
+function addItemKeyframes() {
+  return [
+    { height: '0px', opacity: 0, padding: '0px' },
+    { height: '124px', opacity: 1, padding: '20px' }
+  ];
+}
+
+function removeItemKeyframes() {
+  return [
+    { height: '124px', opacity: 1, padding: '20px' },
+    { height: '0px', opacity: 0, padding: '0px' }
+  ];
+}
+
+function addItemButtonEntranceKeyframes() {
+  return [
+    { height: '93px', opacity: 1 },
+    { height: '0px', opacity: 0 }
+  ];
+}
+
+function addItemButtonExitKeyframes() {
+  return [
+    { height: '0px', opacity: 0 },
+    { height: '93px', opacity: 1 }
+  ];
+}
+
+function baseAnimationOptions() {
+  return { 
+    duration: 200, 
+    easing: "cubic-bezier(0.2,0.5,0.3,1)", 
+    iterations: 1, 
+    fill: "forwards" 
+  };
+}
 
 // Abrir formulario
 function openForm() {
