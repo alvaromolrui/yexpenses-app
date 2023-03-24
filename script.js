@@ -114,10 +114,10 @@ mainAddButton.addEventListener('click', (openForm));
 
 // Cerrar formulario
 function closeForm() {
-  const requiredInputs = form.querySelectorAll("input[required]");
+  /*const requiredInputs = form.querySelectorAll("input[required]");
   requiredInputs.forEach(function (input) {
     input.removeAttribute("required");
-  });
+  });*/
   document.body.style.overflow = "";
   showHeaderButtons();
   closeButton.style.display = "";
@@ -299,6 +299,17 @@ function finishEdition() {
   showMainAddButton();
   loadData();
 }
+
+// Seleccionar elemento
+function selectItem() {
+  const item = document.querySelectorAll(".item");
+  item.forEach(element => {
+    element.style.border = "2px solid red";
+  });
+}
+
+const item = document.querySelectorAll(".item");
+item.addEventListener('click', (selectItem));
 
 // Añadir nueva entrada
 form.addEventListener("submit", (event) => {
