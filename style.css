@@ -245,9 +245,8 @@ body {
 }
 
   .table .item {
-    overflow: hidden;
     position: relative;
-    cursor: default;
+    cursor: pointer;
     width: calc(100% - 40px);
     max-width: 800px;
     min-width: 200px;
@@ -264,6 +263,15 @@ body {
     border: 2px solid rgba(103, 103, 103, 0);
   }
 
+    .table .item:hover {
+      background: #393939;
+    }
+
+    .table .itemSelected {
+      border: 2px solid rgba(103, 103, 103, 1);
+      background: #393939;
+    }
+
   .table .item .itemHeader {
     width: 100%;
     display: flex;
@@ -274,6 +282,7 @@ body {
   }
 
     .table .item .itemHeader .itemTitle {
+      position: relative;
       width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -281,36 +290,42 @@ body {
     }
 
     .table .item .itemHeader .deleteButton {
+      position: absolute;
+      top: -15px;
+      right: -15px;
       align-self: flex-end;
-      width: 22px;
-      height: 22px;
+      width: 30px;
+      height: 30px;
+      background: #282828;
+      border-radius: 50px;
       display: none;
       justify-content: center;
       align-items: center;
-      padding: 5px 0px 0px 0px;
+      padding: 0px 0px 0px 0px;
+      transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
     }
+
+      .table .item .itemHeader .deleteButton:hover {
+        background: #c41515;
+      }
     
       .table .item .itemHeader .deleteButton div {
         position: absolute;
-        width: 15px;
+        width: 12px;
         height: 2px;
         background: #C8C8C8;
         border-radius: 5px;
         transition: all 0.2s cubic-bezier(0.6, 0.2, 0.3, 1.2);
       }
-      
-        .table .item .itemHeader .deleteButton:hover div {
-          background: #c41515;
-        }
-        
+
         .table .item .itemHeader .deleteButton:hover div:first-child {
           transform: rotate(45deg);
-          width: 20px;
+          width: 15px;
         }
         
         .table .item .itemHeader .deleteButton:hover div:last-child {
           transform: rotate(-45deg);
-          width: 20px;
+          width: 15px;
         }
 
   .table .item .itemContent {
@@ -463,4 +478,22 @@ body {
 /* Clases estado */
 .contentVisible {
   display: flex;
+}
+
+/* Clases estado */
+.vibration {
+  transform-origin: 50% 50%;
+  animation: vibration 0.3s linear infinite;
+}
+
+@keyframes vibration {
+  0% {
+    transform: rotate(0.2deg);
+  }
+  50% {
+    transform: rotate(-0.2deg);
+  }
+  100% {
+    transform: rotate(0.2deg);
+  }
 }

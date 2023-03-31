@@ -272,6 +272,7 @@ function editContent() {
     element.style.border = "2px solid rgba(103, 103, 103, 1)";
     element.style.zIndex = "5";
     element.animate(itemEntranceKeyframes(), baseAnimationOptions());
+    // element.classList.add("vibration");
   });
   hideMainAddButton();
 
@@ -300,16 +301,19 @@ function finishEdition() {
   loadData();
 }
 
-// Seleccionar elemento
-function selectItem() {
+
+function selectItem(id) {
   const item = document.querySelectorAll(".item");
   item.forEach(element => {
-    element.style.border = "2px solid red";
+    element.getAttribute("data-id");
+    if (id == element.getAttribute("data-id")) {
+      element.classList.toggle("itemSelected");
+    } else {
+      element.classList.toggle("itemSelected");
+    }
   });
 }
 
-const item = document.querySelectorAll(".item");
-item.addEventListener('click', (selectItem));
 
 // Añadir nueva entrada
 form.addEventListener("submit", (event) => {
@@ -322,6 +326,6 @@ form.addEventListener("submit", (event) => {
 });
 
 // Pintar los datos al cargar la página
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function() {
   loadData();
 });
