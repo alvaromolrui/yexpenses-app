@@ -302,7 +302,7 @@ function finishEdition() {
 }
 
 
-function selectItem(id) {
+/*function selectItem(id) {
   const item = document.querySelectorAll(".item");
   item.forEach(element => {
     element.getAttribute("data-id");
@@ -312,7 +312,20 @@ function selectItem(id) {
       element.classList.toggle("itemSelected");
     }
   });
-}
+}*/
+
+
+  const item = document.querySelectorAll(".item");
+  item.forEach(event => {
+    const elementClicked = event.target;
+    elementClicked.addEventListener('click', ());
+  });
+
+  function selection() {
+    item.forEach(elemento => {
+      elemento.classList.toggle('itemSelected');
+    });
+  }
 
 
 // Añadir nueva entrada
