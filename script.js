@@ -302,15 +302,17 @@ function finishEdition() {
 }
 
 
-/*function selectItem() {
+
+function selectItem() {
   const item = document.querySelectorAll(".item");
   item.forEach(element => {
     element.classList.toggle("itemSelected");
   });
-}*/
+}
 
 
-/*window.onload = function() {
+/*
+window.onload = function() {
   const item = document.querySelectorAll(".item");
   item.forEach(element => {
     element.addEventListener("click", (event) => {
@@ -318,8 +320,10 @@ function finishEdition() {
       itemSelected.classList.toggle("itemSelected");
     });
   });
-}*/
+}
+*/
 
+/*
 document.addEventListener("DOMContentLoaded", function() {
   const item = document.querySelectorAll(".item");
   item.forEach(element => {
@@ -331,6 +335,7 @@ function selectItem(event) {
   const item = event.target;
   item.classList.toggle("itemSelected");
 }
+*/
 
 
 // Añadir nueva entrada
