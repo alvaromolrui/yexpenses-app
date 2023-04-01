@@ -302,12 +302,36 @@ function finishEdition() {
 }
 
 
-function selectItem() {
+/*function selectItem() {
   const item = document.querySelectorAll(".item");
   item.forEach(element => {
     element.classList.toggle("itemSelected");
   });
+}*/
+
+
+/*window.onload = function() {
+  const item = document.querySelectorAll(".item");
+  item.forEach(element => {
+    element.addEventListener("click", (event) => {
+      const itemSelected = event.target;
+      itemSelected.classList.toggle("itemSelected");
+    });
+  });
+}*/
+
+document.addEventListener("DOMContentLoaded", function() {
+  const item = document.querySelectorAll(".item");
+  item.forEach(element => {
+    element.addEventListener("click", selectItem);
+  });
+});
+
+function selectItem(event) {
+  const item = event.target;
+  item.classList.toggle("itemSelected");
 }
+
 
 // Añadir nueva entrada
 form.addEventListener("submit", (event) => {
