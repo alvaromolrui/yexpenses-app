@@ -302,7 +302,7 @@ function finishEdition() {
 }
 
 
-function selectItem(id) {
+function selectItem() {
   const item = document.querySelectorAll(".item");
   item.forEach(element => {
     element.classList.toggle("itemSelected");
