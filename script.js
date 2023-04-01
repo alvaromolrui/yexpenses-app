@@ -302,31 +302,12 @@ function finishEdition() {
 }
 
 
-/*function selectItem(id) {
+function selectItem(id) {
   const item = document.querySelectorAll(".item");
   item.forEach(element => {
-    element.getAttribute("data-id");
-    if (id == element.getAttribute("data-id")) {
-      element.classList.toggle("itemSelected");
-    } else {
-      element.classList.toggle("itemSelected");
-    }
+    element.classList.toggle("itemSelected");
   });
-}*/
-
-
-  const item = document.querySelectorAll(".item");
-  item.forEach(event => {
-    const elementClicked = event.target;
-    elementClicked.addEventListener('click', ());
-  });
-
-  function selection() {
-    item.forEach(elemento => {
-      elemento.classList.toggle('itemSelected');
-    });
-  }
-
+}
 
 // Añadir nueva entrada
 form.addEventListener("submit", (event) => {
