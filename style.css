@@ -263,9 +263,9 @@ body {
     border: 2px solid rgba(103, 103, 103, 0);
   }
 
-    .table .item:hover {
+    /*.table .item:hover {
       background: #393939;
-    }
+    }*/
 
     .table .itemSelected {
       border: 2px solid rgba(103, 103, 103, 1);

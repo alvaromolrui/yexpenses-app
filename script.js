@@ -301,42 +301,23 @@ function finishEdition() {
   loadData();
 }
 
-
-
 function selectItem() {
-  const item = document.querySelectorAll(".item");
-  item.forEach(element => {
-    element.classList.toggle("itemSelected");
-  });
-}
-
-
-/*
-window.onload = function() {
-  const item = document.querySelectorAll(".item");
-  item.forEach(element => {
-    element.addEventListener("click", (event) => {
-      const itemSelected = event.target;
-      itemSelected.classList.toggle("itemSelected");
+  const items = document.querySelectorAll('.item');
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      if (item.classList.contains('itemSelected')) {
+        item.classList.remove('itemSelected');
+      } else {
+        const prevItem = document.querySelector('.itemSelected');
+        if (prevItem) {
+          prevItem.classList.remove('itemSelected');
+        } else {    
+        item.classList.add('itemSelected');
+      }
+    }
     });
   });
 }
-*/
-
-/*
-document.addEventListener("DOMContentLoaded", function() {
-  const item = document.querySelectorAll(".item");
-  item.forEach(element => {
-    element.addEventListener("click", selectItem);
-  });
-});
-
-function selectItem(event) {
-  const item = event.target;
-  item.classList.toggle("itemSelected");
-}
-*/
-
 
 // Añadir nueva entrada
 form.addEventListener("submit", (event) => {
