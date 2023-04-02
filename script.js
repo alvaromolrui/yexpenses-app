@@ -172,6 +172,18 @@ function loadData() {
         itemContainer.classList.add('item', 'itemContainer');
         itemContainer.setAttribute('id', id);
         itemContainer.setAttribute('data-id', id);
+        itemContainer.addEventListener('click', () => {
+          const prevSelectedItem = document.querySelector('.itemSelected');
+          const itemSelected = itemContainer.classList.contains('itemSelected');
+          if (prevSelectedItem) {
+            prevSelectedItem.classList.remove('itemSelected');
+            prevSelectedItem.classList.remove('itemEditionMode');
+          }
+          if (!itemSelected) {
+            itemContainer.classList.add('itemSelected');
+            itemContainer.classList.add('itemEditionMode');
+          }
+        });
         
         const itemHeader = document.createElement('div');
         itemHeader.classList.add('itemHeader');
@@ -207,17 +219,6 @@ function loadData() {
         itemContent.appendChild(itemPrice);
         
         tabla.appendChild(itemContainer);
-
-        const items = document.querySelectorAll('.item');
-        items.forEach(item => {
-          item.addEventListener('click', () => {
-            if (item.classList.contains('itemSelected')) {
-            item.classList.remove('itemSelected');
-          } else {
-            item.classList.add('itemSelected');
-          }
-        });
-      });
     });
   }
   };
