@@ -152,20 +152,80 @@ function setCurrentDate() {
 
 // Pintar los datos del CSV en el DOM
 function loadData() {
-  return new Promise((resolve) => {
-    fetch("read_data.php")
-    .then(function(response) {
-      return response.text();
-    })
-    .then(function(html) {
-      document.getElementById("table").innerHTML = html;
-    })
-    .catch(function(error) {
-      console.error("Error al cargar la tabla:", error);
+  // Crear una petición HTTP para leer el archivo CSV
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      // Parsear los datos CSV
+      const datos = this.responseText.split('\n').map(fila => fila.split(','));
+      const datosInvertidos = datos.reverse();
+      
+      // Crear la tabla dinámicamente
+      const tabla = document.getElementById('table');
+      datosInvertidos.forEach(fila => {
+        const primerValor = fila[1];
+        const segundoValor = fila[2];
+        const tercerValor = fila[3];
+        const id = fila[0];
+        
+        const itemContainer = document.createElement('div');
+        itemContainer.classList.add('item', 'itemContainer');
+        itemContainer.setAttribute('id', id);
+        itemContainer.setAttribute('data-id', id);
+        
+        const itemHeader = document.createElement('div');
+        itemHeader.classList.add('itemHeader');
+        itemContainer.appendChild(itemHeader);
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('deleteButton');
+        deleteButton.setAttribute('onclick', `eliminarFila("${id}")`);
+        itemHeader.appendChild(deleteButton);
+        
+        const div1 = document.createElement('div');
+        deleteButton.appendChild(div1);
+        const div2 = document.createElement('div');
+        deleteButton.appendChild(div2);
+        
+        const itemTitle = document.createElement('h2');
+        itemTitle.classList.add('itemTitle');
+        itemTitle.innerText = primerValor;
+        itemHeader.appendChild(itemTitle);
+        
+        const itemContent = document.createElement('div');
+        itemContent.classList.add('itemContent');
+        itemContainer.appendChild(itemContent);
+        
+        const itemDate = document.createElement('p');
+        itemDate.classList.add('itemDate');
+        itemDate.innerText = segundoValor;
+        itemContent.appendChild(itemDate);
+        
+        const itemPrice = document.createElement('h3');
+        itemPrice.classList.add('itemPrice');
+        itemPrice.innerText = tercerValor + '€';
+        itemContent.appendChild(itemPrice);
+        
+        tabla.appendChild(itemContainer);
+
+        const items = document.querySelectorAll('.item');
+        items.forEach(item => {
+          item.addEventListener('click', () => {
+            if (item.classList.contains('itemSelected')) {
+            item.classList.remove('itemSelected');
+          } else {
+            item.classList.add('itemSelected');
+          }
+        });
+      });
     });
-    resolve();
-  });
+  }
+  };
+  xhttp.open('GET', 'data.csv', true);
+  xhttp.send();
 }
+
+
 
 // Enviar datos del formulario a php
 function saveData(form) {
@@ -290,22 +350,6 @@ function finishEdition() {
 }
 
 
-  const items = document.querySelectorAll('.item');
-  items.forEach(item => {
-    item.addEventListener('click', () => {
-      if (item.classList.contains('itemSelected')) {
-        item.classList.remove('itemSelected');
-      } else {
-        const prevItem = document.querySelector('.itemSelected');
-        if (prevItem) {
-          prevItem.classList.remove('itemSelected');
-        }  
-        item.classList.add('itemSelected');
-    }
-    });
-  });
-
-
 
 // Añadir nueva entrada
 form.addEventListener("submit", (event) => {
@@ -318,4 +362,4 @@ form.addEventListener("submit", (event) => {
 });
 
 // Pintar los datos al cargar la página
-document.addEventListener("DOMContentLoaded", loadData);
+document.addEventListener('DOMContentLoaded', loadData);
