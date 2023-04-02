@@ -20,7 +20,7 @@
     $tercer_valor = $fila[3];
     $id = $fila[0];
 
-    echo "<div class='item' onclick='selectItem()' id='" . $id . "' data-id='" . $id . "'>";
+    echo "<div class='item itemContainer' id='" . $id . "' data-id='" . $id . "'>";
 
       echo '<div class="itemHeader">';
       echo "<button class='deleteButton' onclick='eliminarFila(\"" . $id . "\")'>";

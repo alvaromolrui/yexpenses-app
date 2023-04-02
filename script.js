@@ -39,20 +39,6 @@ function backgroundModalExitKeyframes() {
   ];
 }
 
-function itemEntranceKeyframes() {
-  return [
-    { height: '97px' },
-    { height: '124px' }
-  ];
-}
-
-function itemExitKeyframes() {
-  return [
-    { height: '124px' },
-    { height: '97px' }
-  ];
-}
-
 function addItemKeyframes() {
   return [
     { height: '0px', opacity: 0, padding: '0px' },
@@ -271,7 +257,6 @@ function editContent() {
   item.forEach(element => {
     element.style.border = "2px solid rgba(103, 103, 103, 1)";
     element.style.zIndex = "5";
-    element.animate(itemEntranceKeyframes(), baseAnimationOptions());
     // element.classList.add("vibration");
   });
   hideMainAddButton();
@@ -295,13 +280,14 @@ function finishEdition() {
   item.forEach(element => {
     element.style.border = "";
     element.style.zIndex = "";
-    element.animate(itemExitKeyframes(), baseAnimationOptions());
   });
   showMainAddButton();
   loadData();
 }
 
-function selectItem() {
+
+/*
+window.onload = function() {
   const items = document.querySelectorAll('.item');
   items.forEach(item => {
     item.addEventListener('click', () => {
@@ -311,13 +297,32 @@ function selectItem() {
         const prevItem = document.querySelector('.itemSelected');
         if (prevItem) {
           prevItem.classList.remove('itemSelected');
-        } else {    
+        }  
         item.classList.add('itemSelected');
-      }
     }
     });
   });
-}
+};
+*/
+
+const itemsContainer = document.querySelector('.itemContainer');
+const items = itemsContainer.querySelectorAll('.item');
+
+itemsContainer.addEventListener('click', e => {
+  const clickedItem = e.target;
+  
+  if (clickedItem.classList.contains('item')) {
+    items.forEach(item => {
+      if (item === clickedItem) {
+        item.classList.add('itemSelected');
+      } else {
+        item.classList.remove('itemSelected');
+      }
+    });
+  }
+});
+
+
 
 // Añadir nueva entrada
 form.addEventListener("submit", (event) => {
@@ -330,6 +335,4 @@ form.addEventListener("submit", (event) => {
 });
 
 // Pintar los datos al cargar la página
-document.addEventListener("DOMContentLoaded", function() {
-  loadData();
-});
+document.addEventListener("DOMContentLoaded", loadData);
