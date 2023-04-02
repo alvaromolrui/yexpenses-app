@@ -10,6 +10,8 @@ const form = document.getElementById("formulario");
 const backgroundModal = document.getElementById("backgroundModal");
 const contentVisible = "contentVisible";
 const table = document.getElementById("table");
+const main = document.getElementById("main");
+
 
 function modalEntranceKeyframes() {
   return [
@@ -247,16 +249,17 @@ function showMainAddButton() {
 function editContent() {
   const deleteButton = document.querySelectorAll(".deleteButton");
   const item = document.querySelectorAll(".item");
-  window.scrollTo(0, 0);
+  window.scrollTo(0, -100);
   hideHeaderButtons();
   showBackgroundModal();
   closeButton.style.display = "flex";
   deleteButton.forEach(element => {
     element.style.display = "flex";
   });
+  main.classList.add('mainEditionMode');
+  table.classList.add('tableEditionMode');
   item.forEach(element => {
-    element.style.border = "2px solid rgba(103, 103, 103, 1)";
-    element.style.zIndex = "5";
+    element.classList.add('itemEditionMode');
     // element.classList.add("vibration");
   });
   hideMainAddButton();
@@ -270,24 +273,23 @@ editButton.addEventListener('click', (editContent));
 function finishEdition() {
   const deleteButton = document.querySelectorAll(".deleteButton");
   const item = document.querySelectorAll(".item");
-  window.scrollTo(0, 0);
+  window.scrollTo(0, -100);
   showHeaderButtons();
   hideBackgroundModal();
   closeButton.style.display = "";
   deleteButton.forEach(element => {
     element.style.display = "";
   });
+  main.classList.remove('mainEditionMode');
+  table.classList.remove('tableEditionMode');
   item.forEach(element => {
-    element.style.border = "";
-    element.style.zIndex = "";
+    element.classList.remove('itemEditionMode');
   });
   showMainAddButton();
   loadData();
 }
 
 
-/*
-window.onload = function() {
   const items = document.querySelectorAll('.item');
   items.forEach(item => {
     item.addEventListener('click', () => {
@@ -302,25 +304,6 @@ window.onload = function() {
     }
     });
   });
-};
-*/
-
-const itemsContainer = document.querySelector('.itemContainer');
-const items = itemsContainer.querySelectorAll('.item');
-
-itemsContainer.addEventListener('click', e => {
-  const clickedItem = e.target;
-  
-  if (clickedItem.classList.contains('item')) {
-    items.forEach(item => {
-      if (item === clickedItem) {
-        item.classList.add('itemSelected');
-      } else {
-        item.classList.remove('itemSelected');
-      }
-    });
-  }
-});
 
 
 
