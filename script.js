@@ -78,8 +78,18 @@ function baseAnimationOptions() {
   };
 }
 
+// Cancelar selección de items
+function cancelSelection() {
+  const items = document.querySelectorAll('.item')
+  items.forEach(item => {
+    item.classList.remove('itemSelected');
+    item.classList.remove('itemEditionMode');
+  });
+}
+
 // Abrir formulario
 function openForm() {
+  cancelSelection();
   document.body.style.overflow = "hidden";
   hideHeaderButtons();
   closeButton.style.display = "flex";
@@ -169,7 +179,7 @@ function loadData() {
         const id = fila[0];
         
         const itemContainer = document.createElement('div');
-        itemContainer.classList.add('item', 'itemContainer');
+        itemContainer.classList.add('item');
         itemContainer.setAttribute('id', id);
         itemContainer.setAttribute('data-id', id);
         itemContainer.addEventListener('click', () => {
@@ -183,6 +193,14 @@ function loadData() {
             itemContainer.classList.add('itemSelected');
             itemContainer.classList.add('itemEditionMode');
           }
+        });
+        itemContainer.addEventListener('mousedown', () => {
+          const temporizador = setTimeout(() => {
+            editContent();
+          }, 500);
+          itemContainer.addEventListener('mouseup', () => {
+            clearTimeout(temporizador);
+          })
         });
         
         const itemHeader = document.createElement('div');
@@ -308,6 +326,7 @@ function showMainAddButton() {
 
 // Editar contenido
 function editContent() {
+  cancelSelection();
   const deleteButton = document.querySelectorAll(".deleteButton");
   const item = document.querySelectorAll(".item");
   window.scrollTo(0, -100);
@@ -315,20 +334,19 @@ function editContent() {
   showBackgroundModal();
   closeButton.style.display = "flex";
   deleteButton.forEach(element => {
-    element.style.display = "flex";
+    element.classList.add('deleteButtonVisible');
   });
   main.classList.add('mainEditionMode');
   table.classList.add('tableEditionMode');
   item.forEach(element => {
     element.classList.add('itemEditionMode');
-    // element.classList.add("vibration");
   });
   hideMainAddButton();
 
   closeButton.addEventListener('click', (finishEdition));
 }
 
-editButton.addEventListener('click', (editContent));
+
 
 // Terminar edición
 function finishEdition() {
@@ -339,7 +357,7 @@ function finishEdition() {
   hideBackgroundModal();
   closeButton.style.display = "";
   deleteButton.forEach(element => {
-    element.style.display = "";
+    element.classList.remove('deleteButtonVisible');
   });
   main.classList.remove('mainEditionMode');
   table.classList.remove('tableEditionMode');
