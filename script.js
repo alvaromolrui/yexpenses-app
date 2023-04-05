@@ -188,10 +188,18 @@ function loadData() {
           if (prevSelectedItem) {
             prevSelectedItem.classList.remove('itemSelected');
             prevSelectedItem.classList.remove('itemEditionMode');
+            const deleteButton = document.querySelectorAll('.deleteButton');
+              deleteButton.forEach(element => {
+                element.classList.remove('deleteButtonVisible');
+              });
           }
           if (!itemSelected) {
             itemContainer.classList.add('itemSelected');
             itemContainer.classList.add('itemEditionMode');
+            const deleteButton = document.querySelectorAll('.deleteButton');
+              deleteButton.forEach(element => {
+                element.classList.add('deleteButtonVisible');
+              });
           }
         });
         itemContainer.addEventListener('mousedown', () => {
@@ -243,8 +251,6 @@ function loadData() {
   xhttp.open('GET', 'data.csv', true);
   xhttp.send();
 }
-
-
 
 // Enviar datos del formulario a php
 function saveData(form) {
