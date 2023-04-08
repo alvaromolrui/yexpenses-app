@@ -197,9 +197,9 @@ function loadData() {
             itemContainer.classList.add('itemSelected');
             itemContainer.classList.add('itemEditionMode');
             const deleteButton = document.querySelectorAll('.deleteButton');
-              deleteButton.forEach(element => {
-                element.classList.add('deleteButtonVisible');
-              });
+            deleteButton.forEach(element => {
+              element.classList.add('deleteButtonVisible');
+            });
           }
         });
         itemContainer.addEventListener('mousedown', () => {
